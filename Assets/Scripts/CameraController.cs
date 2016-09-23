@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class CameraController : MonoBehaviour {
-
-    public GameObject player;
 	
 	// Every camera should follow the user and be centered on him
 	void LateUpdate () {
