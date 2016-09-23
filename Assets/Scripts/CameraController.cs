@@ -4,13 +4,9 @@ using System.Collections;
 public class CameraController : MonoBehaviour {
 
     public GameObject player;
-
-	// Use this for initialization
-	void Start () {
-	}
 	
-	// Update is called once per frame
+	// Every camera should follow the user and be centered on him
 	void LateUpdate () {
-        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
+        transform.position = new Vector3(GameManager.Player().transform.position.x, GameManager.Player().transform.position.y, transform.position.z);
 	}
 }

@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
 
     public enum World { FUTURE, PRESENT };
 
+    // only one instance of the GameManager can exist inside the game
     public static GameManager instance = null;
 
     public Camera mainCamera;
@@ -87,5 +88,13 @@ public class GameManager : MonoBehaviour {
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Items World Present"), true);
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("World Future"), false);
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("World Present"), true);
+    }
+
+    /*
+        Static functions
+    */
+    public static Player Player()
+    {
+        return instance.player;
     }
 }
