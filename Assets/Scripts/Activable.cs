@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Activable : MonoBehaviour {
+public abstract class Activable : MonoBehaviour {
 
 	public GameObject button;
 	public Transform activableColliderCheck;
@@ -28,4 +28,13 @@ public class Activable : MonoBehaviour {
 			}	
 		}
 	}
+
+	void LateUpdate(){
+		// check E pressed down
+		if(Input.GetKeyDown (KeyCode.E) && button.activeSelf){
+			Activate ();
+		}
+	}
+
+	protected abstract void Activate ();
 }

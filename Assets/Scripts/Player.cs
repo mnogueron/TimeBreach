@@ -8,9 +8,6 @@ public class Player : MonoBehaviour {
     public Transform bodyCheck;
     public float jumpForce = 700f;
 
-    public LayerMask futureWorldGround;
-    public LayerMask presentWorldGround;
-
     public bool doubleJumpEnabled = false;
 
     private bool facingRight = true;
@@ -32,11 +29,11 @@ public class Player : MonoBehaviour {
     {
         if(GameManager.instance.currentWorld.CompareTo(GameManager.World.PRESENT) == 0)
         {
-            grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, presentWorldGround);
+			grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, GameManager.PresentWorldLayer ());
         }
         else
         {
-            grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, futureWorldGround);
+			grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, GameManager.FutureWorldLayer ());
         }
         animator.SetBool("Ground", grounded);
 
@@ -99,6 +96,6 @@ public class Player : MonoBehaviour {
 
     public bool CanSwitchWorld()
     {
-        return (GameManager.instance.currentWorld.CompareTo(GameManager.World.FUTURE) == 0) ? !Physics2D.OverlapCircle(bodyCheck.position, groundRadius, presentWorldGround) : !Physics2D.OverlapCircle(bodyCheck.position, groundRadius, futureWorldGround);
+		return (GameManager.instance.currentWorld.CompareTo(GameManager.World.FUTURE) == 0) ? !Physics2D.OverlapCircle(bodyCheck.position, groundRadius, GameManager.PresentWorldLayer ()) : !Physics2D.OverlapCircle(bodyCheck.position, groundRadius, GameManager.FutureWorldLayer ());
     }
 }

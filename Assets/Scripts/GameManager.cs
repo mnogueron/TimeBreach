@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour {
 
     public World currentWorld = World.FUTURE;
 
+	public LayerMask futureWorldLayer;
+	public LayerMask presentWorldLayer;
+
     private bool secondCameraEnable = false;
 
 	// Use this for initialization
@@ -43,9 +46,7 @@ public class GameManager : MonoBehaviour {
             UIManager.instance.DisplayOrbActivable();
             if (Input.GetKeyDown(KeyCode.C))
             {
-                secondCameraEnable = !secondCameraEnable;
-                secondCamera.enabled = secondCameraEnable;
-                player.SwitchWorld();
+				GameManager.SwitchWorld ();
             }
         }
         else
@@ -97,4 +98,18 @@ public class GameManager : MonoBehaviour {
     {
         return instance.player;
     }
+
+	public static LayerMask FutureWorldLayer(){
+		return instance.futureWorldLayer;
+	}
+
+	public static LayerMask PresentWorldLayer(){
+		return instance.presentWorldLayer;
+	}
+
+	public static void SwitchWorld(){
+		instance.secondCameraEnable = !instance.secondCameraEnable;
+		instance.secondCamera.enabled = instance.secondCameraEnable;
+		instance.player.SwitchWorld();
+	}
 }
