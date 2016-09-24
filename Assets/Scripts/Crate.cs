@@ -20,25 +20,37 @@ public class Crate : Activable {
 	}
 
 	protected override void Activate(){
-		Debug.Log ("Pressed E key");
-		Debug.Log ("Crate can switch " + CanSwitchWorld ());
+		//Debug.Log ("Crate can switch " + CanSwitchWorld () + " current world " + GameManager.instance.currentWorld);
 
 		if (CanSwitchWorld () && GameManager.Player ().CanSwitchWorld ()) {
-			if (GameManager.instance.currentWorld.CompareTo (GameManager.World.FUTURE) == 0) {
-				// switch player + crateContainer to the PRESENT
-				transform.parent.gameObject.transform.position = new Vector3 (transform.parent.gameObject.transform.position.x, transform.parent.gameObject.transform.position.y, 60f);
-				transform.parent.gameObject.layer = LayerMask.NameToLayer ("Items World Present");
-			}
-			else if(GameManager.instance.currentWorld.CompareTo (GameManager.World.PRESENT) == 0){
-				// switch player + crateContainer to the FUTURE
-				transform.parent.gameObject.transform.position = new Vector3 (transform.parent.gameObject.transform.position.x, transform.parent.gameObject.transform.position.y, 0f);
-				transform.parent.gameObject.layer = LayerMask.NameToLayer ("Items World Future");
-			}
-			GameManager.SwitchWorld ();
-		}
+            Switch();
+            //Debug.Log("Container " + transform.parent.gameObject.transform);
+            //Debug.Log("New Layer" + LayerMask.LayerToName(transform.parent.gameObject.layer));
+
+            GameManager.SwitchWorld ();
+
+            //Debug.Log("New Current world " + GameManager.instance.currentWorld);
+        }
 	}
 
+    private void Switch()
+    {
+        if (GameManager.IsWorldFuture())
+        {
+            // switch player + crateContainer to the PRESENT
+            transform.parent.gameObject.transform.position = new Vector3(transform.parent.gameObject.transform.position.x, transform.parent.gameObject.transform.position.y, 60f);
+            transform.parent.gameObject.SetLayer(LayerMask.NameToLayer("Items World Present"), true);
+        }
+        else
+        {
+            // switch player + crateContainer to the FUTURE
+            transform.parent.gameObject.transform.position = new Vector3(transform.parent.gameObject.transform.position.x, transform.parent.gameObject.transform.position.y, 0f);
+            transform.parent.gameObject.SetLayer(LayerMask.NameToLayer("Items World Future"), true);
+        }
+    }
+
 	bool CanSwitchWorld(){
-		return (GameManager.instance.currentWorld.CompareTo(GameManager.World.FUTURE) == 0) ? !Physics2D.OverlapCircle(activableColliderCheck.position, crateCheckRadius, GameManager.PresentWorldLayer ()) : !Physics2D.OverlapCircle(activableColliderCheck.position, crateCheckRadius, GameManager.FutureWorldLayer ());
-	}
+        LayerMask toCheck = (GameManager.IsWorldFuture()) ? GameManager.PresentWorldLayer() : GameManager.FutureWorldLayer();
+        return !Physics2D.OverlapCircle(activableColliderCheck.position, crateCheckRadius, toCheck);
+    }
 }

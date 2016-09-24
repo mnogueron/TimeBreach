@@ -80,22 +80,21 @@ public class Player : MonoBehaviour {
 
     public void SwitchWorld()
     {
-        if (GameManager.instance.currentWorld.CompareTo(GameManager.World.FUTURE) == 0)
+        if (GameManager.IsWorldFuture())
         {
             // switch to the PRESENT
-            GameManager.instance.currentWorld = GameManager.World.PRESENT;
-            transform.position = new Vector3(transform.position.x, transform.position.y, 60);
+            transform.position = new Vector3(transform.position.x, transform.position.y, 60f);
         }
         else
         {
-            GameManager.instance.currentWorld = GameManager.World.FUTURE;
+            // switch to the FUTURE
             transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
         }
-        GameManager.instance.DisableCollisionForCurrentWorld();
     }
 
     public bool CanSwitchWorld()
     {
-		return (GameManager.instance.currentWorld.CompareTo(GameManager.World.FUTURE) == 0) ? !Physics2D.OverlapCircle(bodyCheck.position, groundRadius, GameManager.PresentWorldLayer ()) : !Physics2D.OverlapCircle(bodyCheck.position, groundRadius, GameManager.FutureWorldLayer ());
+        LayerMask toCheck = (GameManager.IsWorldFuture()) ? GameManager.PresentWorldLayer() : GameManager.FutureWorldLayer();
+        return !Physics2D.OverlapCircle(bodyCheck.position, groundRadius, toCheck);
     }
 }

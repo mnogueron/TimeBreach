@@ -7,20 +7,30 @@ public abstract class Activable : MonoBehaviour {
 	public Transform activableColliderCheck;
 	public float minDistance;
 
-	// Use this for initialization
-	void Start () {
+    public float offsetX = 0f;
+    public float offsetY = 0.65f;
+    
+    public float omegaY = 10.0f;
+    public float amplitudeY = 0.1f;
+
+    private float index;
+
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
 	// Update is called once per frame
 	protected virtual void Update () {
-		float distance = Vector2.Distance (activableColliderCheck.position, GameManager.Player ().transform.position);
+        index += Time.deltaTime;
+        float distance = Vector2.Distance (activableColliderCheck.position, GameManager.Player ().transform.position);
 
 		if(distance <= minDistance){
 			if (!button.activeSelf) {
 				button.SetActive (true);
 			}
-			button.transform.position = new Vector3(transform.position.x, transform.position.y + 0.65f, transform.position.z);
+            float y = amplitudeY * Mathf.Cos(omegaY * index);
+            button.transform.position = new Vector3(transform.position.x + offsetX, transform.position.y + offsetY + y, transform.position.z);
 		}
 		else{
 			if (button.activeSelf) {

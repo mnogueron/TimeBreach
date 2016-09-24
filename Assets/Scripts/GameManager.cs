@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour {
             UIManager.instance.DisplayOrbActivable();
             if (Input.GetKeyDown(KeyCode.C))
             {
-				GameManager.SwitchWorld ();
+				SwitchWorld ();
             }
         }
         else
@@ -111,5 +111,24 @@ public class GameManager : MonoBehaviour {
 		instance.secondCameraEnable = !instance.secondCameraEnable;
 		instance.secondCamera.enabled = instance.secondCameraEnable;
 		instance.player.SwitchWorld();
-	}
+
+        //Debug.Log("Switch World GameManager");
+
+        switch (instance.currentWorld)
+        {
+            case World.FUTURE:
+                instance.currentWorld = World.PRESENT;
+                break;
+            case World.PRESENT:
+                instance.currentWorld = World.FUTURE;
+                break;
+        }
+
+        instance.DisableCollisionForCurrentWorld();
+    }
+
+    public static bool IsWorldFuture()
+    {
+        return instance.currentWorld.CompareTo(World.FUTURE) == 0;
+    }
 }
