@@ -42,7 +42,7 @@ public abstract class Activable : MonoBehaviour {
 
 	void LateUpdate(){
 		// check E pressed down
-		if(Input.GetKeyDown (KeyCode.E) && button.activeSelf){
+		if(Input.GetButtonDown ("Action") && button.activeSelf){
 			Activate ();
 		}
 	}

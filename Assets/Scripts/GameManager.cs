@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour {
         if (player.CanSwitchWorld())
         {
             UIManager.instance.DisplayOrbActivable();
-            if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetButtonDown("Open/Close Gate"))
             {
 				SwitchWorld ();
             }

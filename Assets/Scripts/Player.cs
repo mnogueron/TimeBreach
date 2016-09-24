@@ -58,7 +58,7 @@ public class Player : MonoBehaviour {
 
     void Update()
     {
-        if((grounded || (!doubleJump && doubleJumpEnabled)) && Input.GetKeyDown(KeyCode.Space) )
+        if((grounded || (!doubleJump && doubleJumpEnabled)) && Input.GetButtonDown("Jump") )
         {
             animator.SetBool("Ground", false);
             rigidbody2D.AddForce(new Vector2(0, jumpForce));

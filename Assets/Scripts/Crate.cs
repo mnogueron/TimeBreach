@@ -6,6 +6,7 @@ public class Crate : Activable {
 	public float crateCheckRadius;
 
 	private GameObject buttonDisabledSign;
+    private Animator animator;
 
 
 	public Crate() : base(){
@@ -15,6 +16,7 @@ public class Crate : Activable {
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
+        animator = GetComponent<Animator>();
 		buttonDisabledSign = button.transform.FindChild ("Button").FindChild ("DisabledSign").gameObject;
 		buttonDisabledSign.SetActive (false);
 	}
@@ -41,6 +43,8 @@ public class Crate : Activable {
             //Debug.Log("New Layer" + LayerMask.LayerToName(transform.parent.gameObject.layer));
 
             GameManager.SwitchWorld ();
+
+            animator.SetTrigger("zoomIn");
 
             //Debug.Log("New Current world " + GameManager.instance.currentWorld);
 		}
