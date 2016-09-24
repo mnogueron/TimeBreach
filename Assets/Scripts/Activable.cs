@@ -16,7 +16,8 @@ public abstract class Activable : MonoBehaviour {
     private float index;
 
     // Use this for initialization
-    void Start () {
+    protected virtual void Start () {
+
 	
 	}
 	
