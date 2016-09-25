@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour {
 
     public Image orbActivable;
     public Image orbNotActivable;
+    public Image key;
 
 	// Use this for initialization
 	void Awake () {
@@ -21,6 +22,7 @@ public class UIManager : MonoBehaviour {
         }
 
         DisplayOrbActivable();
+        key.enabled = false;
 	}
 	
 	// Update is called once per frame
