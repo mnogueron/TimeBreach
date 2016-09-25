@@ -22,23 +22,31 @@ public class UIManager : MonoBehaviour {
         }
 
         DisplayOrbActivable();
-        key.enabled = false;
+        HideKey();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
+	void Update () {}
 
-    public void DisplayOrbActivable()
+    public static void DisplayOrbActivable()
     {
-        orbActivable.enabled = true;
-        orbNotActivable.enabled = false;
+        instance.orbActivable.enabled = true;
+        instance.orbNotActivable.enabled = false;
     }
 
-    public void DisplayOrbNotActivable()
+    public static void DisplayOrbNotActivable()
     {
-        orbActivable.enabled = false;
-        orbNotActivable.enabled = true;
+        instance.orbActivable.enabled = false;
+        instance.orbNotActivable.enabled = true;
+    }
+
+    public static void DisplayKey()
+    {
+        instance.key.enabled = true;
+    }
+
+    public static void HideKey()
+    {
+        instance.key.enabled = false;
     }
 }

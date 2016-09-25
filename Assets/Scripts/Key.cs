@@ -18,7 +18,7 @@ public class Key : Collectable
 
     protected override void PickUp()
     {
-        UIManager.instance.key.enabled = true;
+        GameManager.AddKey();
         gameObject.SetActive(false);
     }
 }

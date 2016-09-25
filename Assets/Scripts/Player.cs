@@ -7,6 +7,7 @@ public class Player : MonoBehaviour {
     public Transform groundCheck;
     public Transform bodyCheck;
     public float jumpForce = 700f;
+    public int numberOfKey = 0;
 
     public bool doubleJumpEnabled = false;
 

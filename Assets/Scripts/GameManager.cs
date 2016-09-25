@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour {
 	void LateUpdate () {
         if (player.CanSwitchWorld())
         {
-            UIManager.instance.DisplayOrbActivable();
+            UIManager.DisplayOrbActivable();
             if (Input.GetButtonDown("Open/Close Gate"))
             {
 				SwitchWorld ();
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            UIManager.instance.DisplayOrbNotActivable();
+            UIManager.DisplayOrbNotActivable();
         }
     }
 
@@ -130,5 +130,28 @@ public class GameManager : MonoBehaviour {
     public static bool IsWorldFuture()
     {
         return instance.currentWorld.CompareTo(World.FUTURE) == 0;
+    }
+
+    public static void AddKey()
+    {
+        instance.player.numberOfKey++;
+        if(instance.player.numberOfKey == 1)
+        {
+            UIManager.DisplayKey();
+        }
+    }
+
+    public static void RemoveKey()
+    {
+        instance.player.numberOfKey--;
+        if (instance.player.numberOfKey == 0)
+        {
+            UIManager.HideKey();
+        }
+    }
+
+    public static bool HasKey()
+    {
+        return instance.player.numberOfKey > 0;
     }
 }
