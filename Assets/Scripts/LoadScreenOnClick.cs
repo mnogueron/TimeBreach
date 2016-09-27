@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class LoadScreenOnClick : MonoBehaviour {
 
-	public void LoadByIndex(int sceneIndex)
+	public void LoadByName(string sceneName)
     {
-        SceneManager.LoadScene(sceneIndex); 
+        SceneManager.LoadScene(sceneName); 
     }
 }

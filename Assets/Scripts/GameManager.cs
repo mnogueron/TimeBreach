@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
 
     public bool isPaused = false;
+    public bool pauseExited = false;
 
 	// Use this for initialization
 	void Awake () {
@@ -19,6 +20,8 @@ public class GameManager : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
+        DontDestroyOnLoad(gameObject);
     }
 	
 	// Update is called once per frame
@@ -48,6 +51,13 @@ public class GameManager : MonoBehaviour {
                 UIManager.DisplayPauseMenu();
             }
         }
+
+        // delay next update by 1 frame to prevent from "jumping" with a controller 
+        if (isPaused && pauseExited)
+        {
+            isPaused = false;
+            pauseExited = false;
+        }
     }
 
     /*
@@ -67,7 +77,7 @@ public class GameManager : MonoBehaviour {
 
     public static void Resume()
     {
-        GameManager.instance.isPaused = false;
+        GameManager.instance.pauseExited = true;
         Time.timeScale = 1;
     }
 
