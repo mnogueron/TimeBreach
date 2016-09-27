@@ -3,26 +3,40 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-    public float maxSpeed = 10f;
+    public static Player instance;
+
     public Transform groundCheck;
     public Transform bodyCheck;
+
+    public float maxSpeed = 10f;
     public float jumpForce = 700f;
     public int numberOfKey = 0;
 
     public bool doubleJumpEnabled = false;
 
     private bool facingRight = true;
-    private Animator animator;
-    private new Rigidbody2D rigidbody2D;
     private bool grounded = false;
     private float groundRadius = 0.2f;
     private bool doubleJump = false;
+
+    private Animator animator;
+    private new Rigidbody2D rigidbody2D;
     
 
     // Use this for initialization
-    void Start () {
-        animator = GetComponent<Animator>();
-        rigidbody2D = GetComponent<Rigidbody2D>();
+    void Awake () {
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        instance.animator = GetComponent<Animator>();
+        instance.rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -77,7 +91,7 @@ public class Player : MonoBehaviour {
         }
     }
 
-    void Flip()
+    private void Flip()
     {
         facingRight = !facingRight;
         Vector3 newLocalScale = transform.localScale;
@@ -85,22 +99,37 @@ public class Player : MonoBehaviour {
         transform.localScale = newLocalScale;
     }
 
-    public void SwitchWorld()
+    public static void SwitchWorld()
     {
         if (WorldManager.IsWorldFuture())
         {
             // switch to the PRESENT
-            transform.position = new Vector3(transform.position.x, transform.position.y, 60f);
+            instance.transform.position = new Vector3(instance.transform.position.x, instance.transform.position.y, 60f);
         }
         else
         {
             // switch to the FUTURE
-            transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+            instance.transform.position = new Vector3(instance.transform.position.x, instance.transform.position.y, 0f);
         }
     }
 
-    public bool CanSwitchWorld()
+    public static bool CanSwitchWorld()
     {
-        return !Physics2D.OverlapCircle(bodyCheck.position, groundRadius, WorldManager.GetOppositeLayerMask());
+        return !Physics2D.OverlapCircle(instance.bodyCheck.position, instance.groundRadius, WorldManager.GetOppositeLayerMask());
+    }
+
+    public static void AddKey()
+    {
+        instance.numberOfKey++;
+    }
+
+    public static void RemoveKey()
+    {
+        instance.numberOfKey--;
+    }
+
+    public static bool HasKey()
+    {
+        return instance.numberOfKey > 0;
     }
 }

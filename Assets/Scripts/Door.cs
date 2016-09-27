@@ -20,11 +20,11 @@ public class Door : Activable {
         base.Update();
         if (button.activeSelf)
         {
-            if (!GameManager.HasKey() && !buttonDisabledSign.activeSelf)
+            if (!Player.HasKey() && !buttonDisabledSign.activeSelf)
             {
                 buttonDisabledSign.SetActive(true);
             }
-            else if (GameManager.HasKey() && buttonDisabledSign.activeSelf)
+            else if (Player.HasKey() && buttonDisabledSign.activeSelf)
             {
                 buttonDisabledSign.SetActive(false);
             }
@@ -33,7 +33,7 @@ public class Door : Activable {
 
     protected override void Activate()
     {
-        if (GameManager.HasKey())
+        if (Player.HasKey())
         {
             GameManager.RemoveKey();
             animator.SetTrigger("fadeOut");

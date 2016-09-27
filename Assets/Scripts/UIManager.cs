@@ -4,12 +4,17 @@ using System.Collections;
 
 public class UIManager : MonoBehaviour {
 
+    // only one instance of the UIManager can exist inside the game
     public static UIManager instance = null;
+
+    public enum OrbState { ACTIVABLE, NOTACTIVABLE };
 
     public Image orbActivable;
     public Image orbNotActivable;
     public Image key;
     public GameObject pauseMenu;
+
+    private OrbState orbState;
 
 	// Use this for initialization
 	void Awake () {
@@ -23,22 +28,20 @@ public class UIManager : MonoBehaviour {
         }
 
         InitialiseUI();
+        instance.orbState = OrbState.ACTIVABLE;
 	}
-	
-	// Update is called once per frame
-	void LateUpdate () {
-        if (Input.GetButtonDown("Pause"))
+
+    void FixedUpdate()
+    {
+        if (Player.CanSwitchWorld() && orbState.Equals(OrbState.NOTACTIVABLE))
         {
-            if (instance.pauseMenu.activeSelf)
-            {
-                GameManager.Resume();
-                HidePauseMenu();
-            }
-            else
-            {
-                GameManager.Pause();
-                DisplayPauseMenu();
-            }
+            orbState = OrbState.ACTIVABLE;
+            DisplayOrbActivable();
+        }
+        else if(!Player.CanSwitchWorld() && orbState.Equals(OrbState.ACTIVABLE))
+        {
+            orbState = OrbState.NOTACTIVABLE;
+            DisplayOrbNotActivable();
         }
     }
 

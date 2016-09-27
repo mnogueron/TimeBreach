@@ -3,6 +3,8 @@ using System.Collections;
 
 public class WorldManager : MonoBehaviour {
 
+    public enum World { FUTURE, PRESENT };
+
     // only one instance of the WorldManager can exist inside the game
     public static WorldManager instance = null;
 
@@ -16,11 +18,8 @@ public class WorldManager : MonoBehaviour {
 
     private bool secondCameraEnable = false;
 
-    public enum World { FUTURE, PRESENT };
-
     void Awake()
     {
-
         if (instance == null)
         {
             instance = this;
@@ -36,16 +35,6 @@ public class WorldManager : MonoBehaviour {
         DisableCollisionForCurrentWorld();
         DisableCollisionConstant();
     }
-
-    /*// Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	    
-	}*/
 
     public void DisableCollisionForCurrentWorld()
     {
@@ -102,9 +91,6 @@ public class WorldManager : MonoBehaviour {
     {
         instance.secondCameraEnable = !instance.secondCameraEnable;
         instance.secondCamera.enabled = instance.secondCameraEnable;
-        GameManager.Player().SwitchWorld();
-
-        //Debug.Log("Switch World GameManager");
 
         switch (instance.currentWorld)
         {

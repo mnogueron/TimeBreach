@@ -7,13 +7,10 @@ public class GameManager : MonoBehaviour {
     // only one instance of the GameManager can exist inside the game
     public static GameManager instance = null;
 
-    public Player player;
-
     public bool isPaused = false;
 
 	// Use this for initialization
 	void Awake () {
-
         if (instance == null)
         {
             instance = this;
@@ -26,30 +23,36 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
-        if (player.CanSwitchWorld())
+        if (Player.CanSwitchWorld())
         {
-            UIManager.DisplayOrbActivable();
             if (!instance.isPaused)
             {
                 if (Input.GetButtonDown("Open/Close Gate"))
                 {
-                    WorldManager.SwitchWorld();
+                    SwitchWorld();
                 }
             }
         }
-        else
+
+
+        if (Input.GetButtonDown("Pause"))
         {
-            UIManager.DisplayOrbNotActivable();
+            if (isPaused)
+            {
+                Resume();
+                UIManager.HidePauseMenu();
+            }
+            else
+            {
+                Pause();
+                UIManager.DisplayPauseMenu();
+            }
         }
     }
 
     /*
         Static functions
     */
-    public static Player Player()
-    {
-        return instance.player;
-    }
 
     public static bool IsPaused()
     {
@@ -70,8 +73,8 @@ public class GameManager : MonoBehaviour {
 
     public static void AddKey()
     {
-        instance.player.numberOfKey++;
-        if (instance.player.numberOfKey == 1)
+        Player.AddKey();
+        if (Player.HasKey())
         {
             UIManager.DisplayKey();
         }
@@ -79,16 +82,16 @@ public class GameManager : MonoBehaviour {
 
     public static void RemoveKey()
     {
-        instance.player.numberOfKey--;
-        if (instance.player.numberOfKey == 0)
+        Player.RemoveKey();
+        if (!Player.HasKey())
         {
             UIManager.HideKey();
         }
     }
 
-    public static bool HasKey()
+    public static void SwitchWorld()
     {
-        return instance.player.numberOfKey > 0;
+        Player.SwitchWorld();
+        WorldManager.SwitchWorld();
     }
-
 }
