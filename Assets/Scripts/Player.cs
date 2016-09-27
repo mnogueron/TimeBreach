@@ -28,45 +28,51 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(GameManager.instance.currentWorld.CompareTo(GameManager.World.PRESENT) == 0)
+        if (!GameManager.IsPaused())
         {
-			grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, GameManager.PresentWorldLayer ());
-        }
-        else
-        {
-			grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, GameManager.FutureWorldLayer ());
-        }
-        animator.SetBool("Ground", grounded);
+            if (WorldManager.instance.currentWorld.CompareTo(WorldManager.World.PRESENT) == 0)
+            {
+                grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, WorldManager.PresentWorldLayer());
+            }
+            else
+            {
+                grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, WorldManager.FutureWorldLayer());
+            }
+            animator.SetBool("Ground", grounded);
 
-        animator.SetFloat("vSpeed", rigidbody2D.velocity.y);
+            animator.SetFloat("vSpeed", rigidbody2D.velocity.y);
 
-        if (grounded)
-        {
-            doubleJump = false;
-        }
+            if (grounded)
+            {
+                doubleJump = false;
+            }
 
-        float move = Input.GetAxisRaw("Horizontal");
+            float move = Input.GetAxisRaw("Horizontal");
 
-        animator.SetFloat("Speed", Mathf.Abs(move));
+            animator.SetFloat("Speed", Mathf.Abs(move));
 
-        rigidbody2D.velocity = new Vector2(move * maxSpeed, rigidbody2D.velocity.y);
+            rigidbody2D.velocity = new Vector2(move * maxSpeed, rigidbody2D.velocity.y);
 
-        if((move > 0 && !facingRight) || (move < 0 && facingRight))
-        {
-            Flip();
+            if ((move > 0 && !facingRight) || (move < 0 && facingRight))
+            {
+                Flip();
+            }
         }
     }
 
     void Update()
     {
-        if((grounded || (!doubleJump && doubleJumpEnabled)) && Input.GetButtonDown("Jump") )
+        if (!GameManager.IsPaused())
         {
-            animator.SetBool("Ground", false);
-            rigidbody2D.AddForce(new Vector2(0, jumpForce));
-
-            if(!doubleJump && !grounded)
+            if ((grounded || (!doubleJump && doubleJumpEnabled)) && Input.GetButtonDown("Jump"))
             {
-                doubleJump = true;
+                animator.SetBool("Ground", false);
+                rigidbody2D.AddForce(new Vector2(0, jumpForce));
+
+                if (!doubleJump && !grounded)
+                {
+                    doubleJump = true;
+                }
             }
         }
     }
@@ -74,14 +80,14 @@ public class Player : MonoBehaviour {
     void Flip()
     {
         facingRight = !facingRight;
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
+        Vector3 newLocalScale = transform.localScale;
+        newLocalScale.x *= -1;
+        transform.localScale = newLocalScale;
     }
 
     public void SwitchWorld()
     {
-        if (GameManager.IsWorldFuture())
+        if (WorldManager.IsWorldFuture())
         {
             // switch to the PRESENT
             transform.position = new Vector3(transform.position.x, transform.position.y, 60f);
@@ -95,7 +101,6 @@ public class Player : MonoBehaviour {
 
     public bool CanSwitchWorld()
     {
-        LayerMask toCheck = (GameManager.IsWorldFuture()) ? GameManager.PresentWorldLayer() : GameManager.FutureWorldLayer();
-        return !Physics2D.OverlapCircle(bodyCheck.position, groundRadius, toCheck);
+        return !Physics2D.OverlapCircle(bodyCheck.position, groundRadius, WorldManager.GetOppositeLayerMask());
     }
 }

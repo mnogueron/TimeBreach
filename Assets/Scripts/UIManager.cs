@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour {
     public Image orbActivable;
     public Image orbNotActivable;
     public Image key;
+    public GameObject pauseMenu;
 
 	// Use this for initialization
 	void Awake () {
@@ -21,12 +22,31 @@ public class UIManager : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        DisplayOrbActivable();
-        HideKey();
+        InitialiseUI();
 	}
 	
 	// Update is called once per frame
-	void Update () {}
+	void LateUpdate () {
+        if (Input.GetButtonDown("Pause"))
+        {
+            if (instance.pauseMenu.activeSelf)
+            {
+                GameManager.Resume();
+                HidePauseMenu();
+            }
+            else
+            {
+                GameManager.Pause();
+                DisplayPauseMenu();
+            }
+        }
+    }
+
+    private void InitialiseUI()
+    {
+        DisplayOrbActivable();
+        HideKey();
+    }
 
     public static void DisplayOrbActivable()
     {
@@ -48,5 +68,15 @@ public class UIManager : MonoBehaviour {
     public static void HideKey()
     {
         instance.key.enabled = false;
+    }
+
+    public static void DisplayPauseMenu()
+    {
+        instance.pauseMenu.SetActive(true);
+    }
+
+    public static void HidePauseMenu()
+    {
+        instance.pauseMenu.SetActive(false);
     }
 }

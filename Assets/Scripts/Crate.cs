@@ -42,7 +42,7 @@ public class Crate : Activable {
             //Debug.Log("Container " + transform.parent.gameObject.transform);
             //Debug.Log("New Layer" + LayerMask.LayerToName(transform.parent.gameObject.layer));
 
-            GameManager.SwitchWorld ();
+            WorldManager.SwitchWorld ();
 
             animator.SetTrigger("zoomIn");
 
@@ -52,7 +52,7 @@ public class Crate : Activable {
 
     private void Switch()
     {
-        if (GameManager.IsWorldFuture())
+        if (WorldManager.IsWorldFuture())
         {
             // switch player + crateContainer to the PRESENT
             transform.parent.gameObject.transform.position = new Vector3(transform.parent.gameObject.transform.position.x, transform.parent.gameObject.transform.position.y, 60f);
@@ -67,7 +67,6 @@ public class Crate : Activable {
     }
 
 	bool CanSwitchWorld(){
-        LayerMask toCheck = (GameManager.IsWorldFuture()) ? GameManager.PresentWorldLayer() : GameManager.FutureWorldLayer();
-        return !Physics2D.OverlapCircle(activableColliderCheck.position, crateCheckRadius, toCheck);
+        return !Physics2D.OverlapCircle(activableColliderCheck.position, crateCheckRadius, WorldManager.GetOppositeLayerMask());
     }
 }

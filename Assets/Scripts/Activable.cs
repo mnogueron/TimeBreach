@@ -48,10 +48,14 @@ public abstract class Activable : MonoBehaviour {
 	}
 
 	void LateUpdate(){
-		// check E pressed down
-		if(Input.GetButtonDown ("Action") && button.activeSelf){
-			Activate ();
-		}
+        // check E pressed down
+        if (!GameManager.IsPaused())
+        {
+            if (Input.GetButtonDown("Action") && button.activeSelf)
+            {
+                Activate();
+            }
+        }
 	}
 
 	protected abstract void Activate ();

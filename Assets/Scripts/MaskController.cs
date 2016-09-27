@@ -16,7 +16,7 @@ public class MaskController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.currentWorld.CompareTo(GameManager.World.PRESENT) == 0)
+        if (WorldManager.instance.currentWorld.CompareTo(WorldManager.World.PRESENT) == 0)
         {
             index += Time.deltaTime;
             float x = baseScaleX + amplitudeX * Mathf.Cos(omegaX * index);
