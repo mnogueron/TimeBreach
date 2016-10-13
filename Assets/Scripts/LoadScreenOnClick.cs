@@ -6,6 +6,7 @@ public class LoadScreenOnClick : MonoBehaviour {
 
 	public void LoadByName(string sceneName)
     {
-        SceneManager.LoadScene(sceneName); 
+        SceneLoader.LoadNextScene();
+        //SceneManager.LoadScene(sceneName); 
     }
 }

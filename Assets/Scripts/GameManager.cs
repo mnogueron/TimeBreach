@@ -8,20 +8,19 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
 
     public bool isPaused = false;
-    public bool pauseExited = false;
+    private bool pauseExited = false;
 
 	// Use this for initialization
 	void Awake () {
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
-
-        DontDestroyOnLoad(gameObject);
     }
 	
 	// Update is called once per frame
