@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MiniMapController : MonoBehaviour {
 
-    // only one instance of the GameManager can exist inside the game
+    // only one instance of the MiniMapController can exist inside the game
     public static MiniMapController instance = null;
 
     public GameObject mask;

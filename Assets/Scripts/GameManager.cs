@@ -57,6 +57,18 @@ public class GameManager : MonoBehaviour {
             }
         }
 
+        if (Input.GetKeyDown("v"))
+        {
+            Debug.Log("Start decrease");
+            PowerBarManager.StartDecrease();
+        }
+
+        if (Input.GetKeyDown("b"))
+        {
+            Debug.Log("Start regen");
+            PowerBarManager.StartRegen();
+        }
+
         // delay next update by 1 frame to prevent from "jumping" with a controller 
         if (isPaused && pauseExited)
         {
