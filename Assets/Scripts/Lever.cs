@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Lever : Activable {
 
-	public Elevator elevator;
+	public Raisable raisableObject;
 
 	private GameObject leverInactive;
 	private GameObject leverActive;
@@ -31,12 +31,12 @@ public class Lever : Activable {
 			// activate the lever
 			leverInactive.SetActive (false);
 			leverActive.SetActive (true);
-			elevator.Activate ();
+			raisableObject.Activate ();
 		} else {
 			// deactivate the lever
 			leverInactive.SetActive (true);
 			leverActive.SetActive (false);
-			elevator.Deactivate ();
+			raisableObject.Deactivate ();
 		}
 		isActive = !isActive;
 	}
