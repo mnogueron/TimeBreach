@@ -8,9 +8,7 @@ public class UIManager : MonoBehaviour {
     public static UIManager instance = null;
 
     public enum OrbState { ACTIVABLE, NOTACTIVABLE };
-
-    public Image orbActivable;
-    public Image orbNotActivable;
+    
     public Image key;
     public GameObject pauseMenu;
 
@@ -37,31 +35,18 @@ public class UIManager : MonoBehaviour {
         if (Player.CanSwitchWorld() && orbState.Equals(OrbState.NOTACTIVABLE))
         {
             orbState = OrbState.ACTIVABLE;
-            DisplayOrbActivable();
+            PowerBarManager.EnablePowerBar();
         }
         else if(!Player.CanSwitchWorld() && orbState.Equals(OrbState.ACTIVABLE))
         {
             orbState = OrbState.NOTACTIVABLE;
-            DisplayOrbNotActivable();
+            PowerBarManager.DisablePowerBar();
         }
     }
 
     private void InitialiseUI()
     {
-        DisplayOrbActivable();
         HideKey();
-    }
-
-    public static void DisplayOrbActivable()
-    {
-        instance.orbActivable.enabled = true;
-        instance.orbNotActivable.enabled = false;
-    }
-
-    public static void DisplayOrbNotActivable()
-    {
-        instance.orbActivable.enabled = false;
-        instance.orbNotActivable.enabled = true;
     }
 
     public static void DisplayKey()
