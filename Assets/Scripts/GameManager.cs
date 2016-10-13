@@ -31,9 +31,15 @@ public class GameManager : MonoBehaviour {
             {
                 if (Input.GetButtonDown("Open/Close Gate"))
                 {
+                    MiniMapController.HideMiniMap();
                     SwitchWorld();
                 }
             }
+        }
+
+        if (WorldManager.IsWorldFuture() && Input.GetButtonDown("MiniMap"))
+        {
+            MiniMapController.SwitchMiniMapState();
         }
 
 
