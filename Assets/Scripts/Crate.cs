@@ -35,18 +35,10 @@ public class Crate : Activable {
 	}
 
 	protected override void Activate(){
-		//Debug.Log ("Crate can switch " + CanSwitchWorld () + " current world " + GameManager.instance.currentWorld);
-
 		if (CanSwitchWorld() && Player.CanSwitchWorld ()) {
             Switch();
-            //Debug.Log("Container " + transform.parent.gameObject.transform);
-            //Debug.Log("New Layer" + LayerMask.LayerToName(transform.parent.gameObject.layer));
-
             GameManager.SwitchWorld ();
-
             animator.SetTrigger("zoomIn");
-
-            //Debug.Log("New Current world " + GameManager.instance.currentWorld);
 		}
 	}
 

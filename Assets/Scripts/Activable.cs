@@ -17,10 +17,7 @@ public abstract class Activable : MonoBehaviour {
     protected bool buttonIsDisabled = false;
 
     // Use this for initialization
-    protected virtual void Start () {
-
-	
-	}
+    protected virtual void Start() { }
 	
 	// Update is called once per frame
 	protected virtual void Update () {
@@ -48,7 +45,7 @@ public abstract class Activable : MonoBehaviour {
 	}
 
 	void LateUpdate(){
-        // check E pressed down
+        // check Action button pressed down
         if (!GameManager.IsPaused())
         {
             if (Input.GetButtonDown("Action") && button.activeSelf)

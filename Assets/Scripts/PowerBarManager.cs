@@ -54,50 +54,54 @@ public class PowerBarManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (isDecreasing)
+
+        if (!GameManager.IsPaused())
         {
-            if(power > 0)
+            if (isDecreasing)
             {
-                power -= powerLoss * speed;
-                powerBar.rectTransform.offsetMax = new Vector2(-minSize + minSize * (power / 100f), powerBar.rectTransform.offsetMax.y);
-                if (!isDisabled)
+                if (power > 0)
                 {
-                    powerBar.color = new Color(1f, (power / 100f), (power / 100f), 1f);
+                    power -= powerLoss * speed;
+                    powerBar.rectTransform.offsetMax = new Vector2(-minSize + minSize * (power / 100f), powerBar.rectTransform.offsetMax.y);
+                    if (!isDisabled)
+                    {
+                        powerBar.color = new Color(1f, (power / 100f), (power / 100f), 1f);
+                    }
+                }
+                else
+                {
+                    isDecreasing = false;
+                    isRegenerating = true;
+                    isDepleted = true;
+
+                    ShowOrbNonActivable();
+
+                    if (listener != null)
+                    {
+                        listener.OnStatusBarDepleted();
+                    }
                 }
             }
-            else
+            else if (isRegenerating)
             {
-                isDecreasing = false;
-                isRegenerating = true;
-                isDepleted = true;
-
-                ShowOrbNonActivable();
-
-                if(listener != null)
+                if (power < 100)
                 {
-                    listener.OnStatusBarDepleted();
+                    power += powerRegen * speed;
+                    powerBar.rectTransform.offsetMax = new Vector2(-minSize + minSize * (power / 100f), powerBar.rectTransform.offsetMax.y);
+                    if (!isDisabled)
+                    {
+                        powerBar.color = new Color(1f, (power / 100f), (power / 100f), 1f);
+                    }
                 }
-            }
-        }
-        else if (isRegenerating)
-        {
-            if(power < 100)
-            {
-                power += powerRegen * speed;
-                powerBar.rectTransform.offsetMax = new Vector2(-minSize + minSize * (power / 100f), powerBar.rectTransform.offsetMax.y);
-                if (!isDisabled)
+                else
                 {
-                    powerBar.color = new Color(1f, (power / 100f), (power / 100f), 1f);
-                }
-            }
-            else
-            {
-                isRegenerating = false;
-                isDepleted = false;
+                    isRegenerating = false;
+                    isDepleted = false;
 
-                if (!isDisabled)
-                {
-                    ShowOrbActivable();
+                    if (!isDisabled)
+                    {
+                        ShowOrbActivable();
+                    }
                 }
             }
         }

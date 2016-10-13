@@ -23,6 +23,8 @@ public class MiniMapController : MonoBehaviour {
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            // by default always disable the minimap
             instance.gameObject.SetActive(false);
         }
         else
@@ -36,6 +38,7 @@ public class MiniMapController : MonoBehaviour {
         instance.mask.SetActive(false);
         instance.gameObject.SetActive(true);
 
+        // the minimap consume power, start depleting the power bar
         PowerBarManager.SetListener(new PowerBarListenerForMiniMap());
         PowerBarManager.StartDecrease(1f);
     }

@@ -44,7 +44,7 @@ public class Player : MonoBehaviour {
     {
         if (!GameManager.IsPaused())
         {
-            if (WorldManager.instance.currentWorld.CompareTo(WorldManager.World.PRESENT) == 0)
+            if (!WorldManager.IsWorldFuture())
             {
                 grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, WorldManager.PresentWorldLayer());
             }
