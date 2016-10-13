@@ -27,7 +27,7 @@ public abstract class Activable : MonoBehaviour {
         if (!buttonIsDisabled)
         {
             index += Time.deltaTime;
-            float distance = Vector2.Distance(activableColliderCheck.position, Player.instance.transform.position);
+            float distance = Vector3.Distance(activableColliderCheck.position, Player.instance.transform.position);
 
             if (distance <= minDistance)
             {
