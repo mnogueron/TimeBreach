@@ -100,7 +100,8 @@ public class Player : MonoBehaviour {
 			if(instance.transform.position.y < -3.5 )
 			{
 				Debug.Log ("Player is falling !");
-				instance.transform.position = initialPosition;
+                StartCoroutine(SceneController.ResetScene());
+				//instance.transform.position = initialPosition;
 			}
         }
     }
