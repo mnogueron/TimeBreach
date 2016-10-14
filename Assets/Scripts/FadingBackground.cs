@@ -35,19 +35,21 @@ public class FadingBackground : MonoBehaviour {
         return instance.fadeOutDuration;
     }
 
-    public static IEnumerator FadeInAsync()
+	public static IEnumerator FadeInAsync(float fadeInDuration = -1f)
     {
+		float concreteFadeInDuration = fadeInDuration != -1f ? fadeInDuration : instance.fadeInDuration;
         instance.image.enabled = true;
         instance.image.canvasRenderer.SetAlpha(0.0f);
-        instance.image.CrossFadeAlpha(1.0f, instance.fadeInDuration, false);
-        yield return new WaitForSeconds(instance.fadeInDuration);
+		instance.image.CrossFadeAlpha(1.0f, concreteFadeInDuration, false);
+		yield return new WaitForSeconds(concreteFadeInDuration);
     }
 
-    public static IEnumerator FadeOutAsync()
+	public static IEnumerator FadeOutAsync(float fadeOutDuration = -1f)
     {
+		float concreteFadeOutDuration = fadeOutDuration != -1f ? fadeOutDuration : instance.fadeOutDuration;
         instance.image.enabled = true;
         instance.image.canvasRenderer.SetAlpha(1.0f);
-        instance.image.CrossFadeAlpha(0.0f, instance.fadeOutDuration, false);
-        yield return new WaitForSeconds(instance.fadeOutDuration);
+		instance.image.CrossFadeAlpha(0.0f, concreteFadeOutDuration, false);
+		yield return new WaitForSeconds(concreteFadeOutDuration);
     }
 }
