@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class SceneLoader : MonoBehaviour {
 
     public static SceneLoader instance;
-
-    public string currentScene = "SceneLoader";
+    
     public string loadingScene = "Loader";
+
+    private List<string> listOfLevels;
 
     private float minDuration = 3f;
 
@@ -17,6 +19,11 @@ public class SceneLoader : MonoBehaviour {
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            listOfLevels = new List<string>();
+            listOfLevels.Add("TimeBreachMainMenu");
+            listOfLevels.Add("Level1Test");
+            listOfLevels.Add("TimeBreach");
         }
         else
         {
@@ -26,7 +33,17 @@ public class SceneLoader : MonoBehaviour {
 
     public static void LoadNextScene()
     {
-        instance.StartCoroutine(LoadScene("Level1Test"));
+        int indexOfCurrentScene = instance.listOfLevels.IndexOf(SceneManager.GetActiveScene().name);
+        string nextScene;
+        if(indexOfCurrentScene + 1 >= instance.listOfLevels.Count)
+        {
+            nextScene = instance.listOfLevels[0];
+        }
+        else
+        {
+            nextScene = instance.listOfLevels[indexOfCurrentScene + 1];
+        }
+        instance.StartCoroutine(LoadScene(nextScene));
     }
 
 

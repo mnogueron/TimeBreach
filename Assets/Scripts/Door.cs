@@ -36,9 +36,10 @@ public class Door : Activable {
         if (Player.HasKey())
         {
             GameManager.RemoveKey();
-            animator.SetTrigger("fadeOut");
-            buttonIsDisabled = true;
-            button.SetActive(false);
+            //animator.SetTrigger("fadeOut");
+            //buttonIsDisabled = true;
+            //button.SetActive(false);
+            SceneLoader.LoadNextScene();
         }
     }
 
