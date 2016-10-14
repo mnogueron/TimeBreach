@@ -21,6 +21,8 @@ public class Player : MonoBehaviour {
 
     private Animator animator;
     private new Rigidbody2D rigidbody2D;
+
+	private Vector3 initialPosition;
     
 
     // Use this for initialization
@@ -37,6 +39,7 @@ public class Player : MonoBehaviour {
 
         instance.animator = GetComponent<Animator>();
         instance.rigidbody2D = GetComponent<Rigidbody2D>();
+		initialPosition = instance.transform.position;
     }
 
     // Update is called once per frame
@@ -88,6 +91,17 @@ public class Player : MonoBehaviour {
                     doubleJump = true;
                 }
             }
+			// check is player is falling.
+			// if he is falling, make him start from the beginning, at his initial position
+			if(instance.transform.position.y < -2.0)
+			{
+				instance.transform.position = new Vector3(instance.transform.position.x, instance.transform.position.y, 2f);
+			}
+			if(instance.transform.position.y < -3.5 )
+			{
+				Debug.Log ("Player is falling !");
+				instance.transform.position = initialPosition;
+			}
         }
     }
 
