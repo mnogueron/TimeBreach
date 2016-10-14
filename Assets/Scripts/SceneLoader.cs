@@ -9,7 +9,7 @@ public class SceneLoader : MonoBehaviour {
     public string currentScene = "SceneLoader";
     public string loadingScene = "Loader";
 
-    public float minDuration = 5f;
+    private float minDuration = 3f;
 
     void Awake()
     {
@@ -26,7 +26,7 @@ public class SceneLoader : MonoBehaviour {
 
     public static void LoadNextScene()
     {
-        instance.StartCoroutine(LoadScene("TimeBreach"));
+        instance.StartCoroutine(LoadScene("Level1Test"));
     }
 
 
@@ -34,15 +34,17 @@ public class SceneLoader : MonoBehaviour {
     static IEnumerator LoadScene(string sceneName)
     {
         // Fade to black
-        yield return instance.StartCoroutine(FadingBackground.FadeInAsync());
+        yield return FadingBackground.FadeInAsync();
 
         // Load loading screen
         yield return SceneManager.LoadSceneAsync(instance.loadingScene);
 
+        Debug.Log("Loading screen loaded");
+
         // !!! unload old screen (automatic)
 
         // Fade to loading screen
-        yield return instance.StartCoroutine(FadingBackground.FadeOutAsync());
+        //yield return instance.StartCoroutine(FadingBackground.FadeOutAsync());
 
         float endTime = Time.time + instance.minDuration;
 
@@ -50,23 +52,30 @@ public class SceneLoader : MonoBehaviour {
 
         // good way to load with loading screen
         //yield return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-        yield return SceneManager.LoadSceneAsync(sceneName);
+        AsyncOperation async = SceneManager.LoadSceneAsync(sceneName);
+        async.allowSceneActivation = false;
 
         if (Time.time < endTime)
-
+        {
             yield return new WaitForSeconds(endTime - Time.time);
+        }
+
+        yield return FadingBackground.FadeInAsync();
+
+        async.allowSceneActivation = true;
 
         // Load appropriate zone's music based on zone data
         //MusicManager.PlayMusic(music);
 
         // Fade to black
-        yield return instance.StartCoroutine(FadingBackground.FadeInAsync());
+        //yield return instance.StartCoroutine(FadingBackground.FadeInAsync());
 
         // !!! unload loading screen
+        //SceneManager.UnloadScene(instance.loadingScene);
         //LoadingSceneManager.UnloadLoadingScene();
 
         // Fade to new screen
-        yield return instance.StartCoroutine(FadingBackground.FadeOutAsync());
+        //yield return instance.StartCoroutine(FadingBackground.FadeOutAsync());
 
     }
 }

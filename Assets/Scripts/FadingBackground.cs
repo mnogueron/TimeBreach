@@ -6,14 +6,18 @@ public class FadingBackground : MonoBehaviour {
 
     public static FadingBackground instance;
 
-    public Image image;
+    private Image image;
+
+    public float fadeInDuration = 1.5f;
+    public float fadeOutDuration = 1.5f;
 
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            image = GetComponent<Image>();
+            image.enabled = false;
         }
         else
         {
@@ -21,19 +25,29 @@ public class FadingBackground : MonoBehaviour {
         }
     }
 
+    public static float GetFadeInDuration()
+    {
+        return instance.fadeInDuration;
+    }
+
+    public static float GetFadeOutDuration()
+    {
+        return instance.fadeOutDuration;
+    }
+
     public static IEnumerator FadeInAsync()
     {
-        Debug.Log("FadeIn");
+        instance.image.enabled = true;
         instance.image.canvasRenderer.SetAlpha(0.0f);
-        instance.image.CrossFadeAlpha(1.0f, 1.5f, false);
-        yield return null;
+        instance.image.CrossFadeAlpha(1.0f, instance.fadeInDuration, false);
+        yield return new WaitForSeconds(instance.fadeInDuration);
     }
 
     public static IEnumerator FadeOutAsync()
     {
-        Debug.Log("FadeOut");
+        instance.image.enabled = true;
         instance.image.canvasRenderer.SetAlpha(1.0f);
-        instance.image.CrossFadeAlpha(0.0f, 1.5f, false);
-        yield return null;
+        instance.image.CrossFadeAlpha(0.0f, instance.fadeOutDuration, false);
+        yield return new WaitForSeconds(instance.fadeOutDuration);
     }
 }

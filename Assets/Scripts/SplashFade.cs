@@ -17,7 +17,14 @@ public class SplashFade : MonoBehaviour {
         FadeIn();
         yield return new WaitForSeconds(2.5f);
         FadeOut();
-        yield return new WaitForSeconds(2.5f);
+
+        if (FadingBackground.GetFadeInDuration() < 2.5f)
+        {
+            yield return new WaitForSeconds(2.5f - FadingBackground.GetFadeInDuration());
+        }
+
+        yield return FadingBackground.FadeInAsync();
+        //yield return new WaitForSeconds(5f);
         SceneManager.LoadScene(loadLevel);
     }
 

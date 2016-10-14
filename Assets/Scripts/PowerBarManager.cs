@@ -41,7 +41,6 @@ public class PowerBarManager : MonoBehaviour {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
 
             orbActivable.enabled = true;
             orbNonActivable.enabled = false;
