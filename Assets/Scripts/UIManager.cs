@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (GameManager.IsOrbEnabled())
+		if (Player.HasOrbem ())
         {
             if (Player.CanSwitchWorld() && orbState.Equals(OrbState.NOTACTIVABLE))
             {

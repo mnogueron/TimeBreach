@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
     public float maxSpeed = 10f;
     public float jumpForce = 700f;
     public int numberOfKey = 0;
+	public bool hasOrbem = false;
 
     public bool doubleJumpEnabled = false;
 
@@ -114,7 +115,7 @@ public class Player : MonoBehaviour {
 
     public static bool CanSwitchWorld()
     {
-        return GameManager.IsOrbEnabled() ? !Physics2D.OverlapCircle(instance.bodyCheck.position, instance.groundRadius, WorldManager.GetOppositeLayerMask()) : false;
+		return Player.HasOrbem () ? !Physics2D.OverlapCircle(instance.bodyCheck.position, instance.groundRadius, WorldManager.GetOppositeLayerMask()) : false;
     }
 
     public static void AddKey()
@@ -131,4 +132,14 @@ public class Player : MonoBehaviour {
     {
         return instance.numberOfKey > 0;
     }
+
+	public static bool HasOrbem()
+	{
+		return instance.hasOrbem;
+	}
+
+	public static void SetHasOrbem(bool b)
+	{
+		instance.hasOrbem = b;
+	}
 }
