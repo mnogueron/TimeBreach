@@ -13,6 +13,7 @@ public class LoadSaveManager : MonoBehaviour {
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {

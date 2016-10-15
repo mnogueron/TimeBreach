@@ -22,7 +22,6 @@ public class MiniMapController : MonoBehaviour {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
 
             // by default always disable the minimap
             instance.gameObject.SetActive(false);
