@@ -9,9 +9,10 @@ public class SceneController : MonoBehaviour {
         StartCoroutine(FadingBackground.FadeOutAsync());
     }
 
-    public static IEnumerator ResetScene()
+	public static IEnumerator ResetScene(float fadeInDuration = -1f)
     {
-        yield return FadingBackground.FadeInAsync();
+		yield return FadingBackground.FadeInAsync(fadeInDuration);
+		Debug.Log ("Fading finished");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
