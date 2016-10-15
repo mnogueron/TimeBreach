@@ -23,6 +23,7 @@ public class SceneLoader : MonoBehaviour {
             listOfLevels = new List<string>();
             listOfLevels.Add("TimeBreachMainMenu");
             listOfLevels.Add("Level1Test");
+            listOfLevels.Add("Level2");
             listOfLevels.Add("TimeBreach");
         }
         else
@@ -33,9 +34,14 @@ public class SceneLoader : MonoBehaviour {
 
     public static void LoadNextScene()
     {
+        instance.StartCoroutine(LoadScene(GetNextSceneName()));
+    }
+
+    public static string GetNextSceneName()
+    {
         int indexOfCurrentScene = instance.listOfLevels.IndexOf(SceneManager.GetActiveScene().name);
         string nextScene;
-        if(indexOfCurrentScene + 1 >= instance.listOfLevels.Count)
+        if (indexOfCurrentScene + 1 >= instance.listOfLevels.Count)
         {
             nextScene = instance.listOfLevels[0];
         }
@@ -43,12 +49,17 @@ public class SceneLoader : MonoBehaviour {
         {
             nextScene = instance.listOfLevels[indexOfCurrentScene + 1];
         }
-        instance.StartCoroutine(LoadScene(nextScene));
+        return nextScene;
+    }
+
+    public static void LoadSceneByName(string sceneName)
+    {
+        instance.StartCoroutine(LoadScene(sceneName));
     }
 
 
     // The coroutine runs on its own at the same time as Update() and takes an integer indicating which scene to load.
-    static IEnumerator LoadScene(string sceneName)
+    public static IEnumerator LoadScene(string sceneName)
     {
         // Fade to black
         yield return FadingBackground.FadeInAsync();

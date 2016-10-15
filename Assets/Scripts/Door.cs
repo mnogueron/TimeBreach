@@ -39,6 +39,13 @@ public class Door : Activable {
             //animator.SetTrigger("fadeOut");
             //buttonIsDisabled = true;
             //button.SetActive(false);
+
+            PlayerData dataToSave = new PlayerData();
+            dataToSave.isCheckpoint = false;
+            dataToSave.playerHasOrb = Player.HasOrbem();
+            dataToSave.sceneName = SceneLoader.GetNextSceneName();
+
+            LoadSaveManager.Save(dataToSave);
             SceneLoader.LoadNextScene();
         }
     }
