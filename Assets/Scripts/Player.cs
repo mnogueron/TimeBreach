@@ -114,7 +114,7 @@ public class Player : MonoBehaviour {
 
     public static bool CanSwitchWorld()
     {
-        return !Physics2D.OverlapCircle(instance.bodyCheck.position, instance.groundRadius, WorldManager.GetOppositeLayerMask());
+        return GameManager.IsOrbEnabled() ? !Physics2D.OverlapCircle(instance.bodyCheck.position, instance.groundRadius, WorldManager.GetOppositeLayerMask()) : false;
     }
 
     public static void AddKey()

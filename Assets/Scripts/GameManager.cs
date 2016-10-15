@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour {
     }
 
     public bool isPaused = false;
+    public bool orbEnable = true;
+
     private bool pauseExited = false;
 
 	// Use this for initialization
@@ -41,7 +43,7 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate () {
 
-        if (!isPaused)
+        if (!isPaused && orbEnable)
         {
 
             if(Player.CanSwitchWorld() && PowerBarManager.IsDepleted() && !WorldManager.IsWorldFuture())
@@ -101,6 +103,11 @@ public class GameManager : MonoBehaviour {
     /*
         Static functions
     */
+
+    public static bool IsOrbEnabled()
+    {
+        return instance.orbEnable;
+    }
 
     public static bool IsPaused()
     {

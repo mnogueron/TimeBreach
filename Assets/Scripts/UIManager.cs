@@ -31,15 +31,18 @@ public class UIManager : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (Player.CanSwitchWorld() && orbState.Equals(OrbState.NOTACTIVABLE))
+        if (GameManager.IsOrbEnabled())
         {
-            orbState = OrbState.ACTIVABLE;
-            PowerBarManager.EnablePowerBar();
-        }
-        else if(!Player.CanSwitchWorld() && orbState.Equals(OrbState.ACTIVABLE))
-        {
-            orbState = OrbState.NOTACTIVABLE;
-            PowerBarManager.DisablePowerBar();
+            if (Player.CanSwitchWorld() && orbState.Equals(OrbState.NOTACTIVABLE))
+            {
+                orbState = OrbState.ACTIVABLE;
+                PowerBarManager.EnablePowerBar();
+            }
+            else if (!Player.CanSwitchWorld() && orbState.Equals(OrbState.ACTIVABLE))
+            {
+                orbState = OrbState.NOTACTIVABLE;
+                PowerBarManager.DisablePowerBar();
+            }
         }
     }
 
