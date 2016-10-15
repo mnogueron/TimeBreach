@@ -9,7 +9,6 @@ public class UIManager : MonoBehaviour {
 
     public enum OrbState { ACTIVABLE, NOTACTIVABLE };
     
-    public Image key;
     public GameObject pauseMenu;
 
     private OrbState orbState;
@@ -53,12 +52,12 @@ public class UIManager : MonoBehaviour {
 
     public static void DisplayKey()
     {
-        instance.key.enabled = true;
+        UICollectable.DisplayKey();
     }
 
     public static void HideKey()
     {
-        instance.key.enabled = false;
+        UICollectable.HideKey();
     }
 
     public static void DisplayPauseMenu()
