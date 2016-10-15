@@ -6,7 +6,7 @@ public class FadingBackground : MonoBehaviour {
 
     public static FadingBackground instance;
 
-    private Image image;
+    public Image image;
 
     public float fadeInDuration = 1.5f;
     public float fadeOutDuration = 1.5f;
@@ -16,8 +16,9 @@ public class FadingBackground : MonoBehaviour {
         if (instance == null)
         {
             instance = this;
-            image = GetComponent<Image>();
             image.enabled = false;
+
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
