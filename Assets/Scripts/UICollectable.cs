@@ -9,9 +9,9 @@ public class UICollectable : MonoBehaviour {
 
     public Image key;
 
-    private bool isDisabled = false;
+    private bool isVisible = true;
 
-    void Awake()
+	void Awake()
     {
         if (instance == null)
         {
@@ -26,13 +26,13 @@ public class UICollectable : MonoBehaviour {
 
     public static void Show()
     {
-        instance.isDisabled = false;
+        instance.isVisible = true;
         instance.gameObject.SetActive(true);
     }
 
     public static void Hide()
     {
-        instance.isDisabled = true;
+        instance.isVisible = false;
         instance.gameObject.SetActive(false);
     }
 
@@ -45,4 +45,10 @@ public class UICollectable : MonoBehaviour {
     {
         instance.key.enabled = false;
     }
+
+	public static void ChangeYPosition(float newY)
+	{
+		RectTransform rectTransform = instance.gameObject.GetComponent<RectTransform> ();
+		rectTransform.anchoredPosition = new Vector2 (rectTransform.anchoredPosition.x, newY);
+	}
 }

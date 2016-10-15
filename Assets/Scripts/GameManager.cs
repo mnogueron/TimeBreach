@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour {
             }
             else
             {
-                PowerBarManager.BlockRegen();
+                UIPowerBar.BlockRegen();
             }
         }
     }
@@ -45,20 +45,20 @@ public class GameManager : MonoBehaviour {
 		if (!isPaused && Player.HasOrbem ())
         {
 
-            if(Player.CanSwitchWorld() && PowerBarManager.IsDepleted() && !WorldManager.IsWorldFuture())
+            if(Player.CanSwitchWorld() && UIPowerBar.IsDepleted() && !WorldManager.IsWorldFuture())
             {
                 Player.SwitchWorld();
                 WorldManager.SwitchWorld();
-                PowerBarManager.StartRegen();
+                UIPowerBar.StartRegen();
             }
 
 
-            if (Input.GetButtonDown("Open/Close Gate") && Player.CanSwitchWorld() && !PowerBarManager.IsDepleted())
+            if (Input.GetButtonDown("Open/Close Gate") && Player.CanSwitchWorld() && !UIPowerBar.IsDepleted())
             {
                 SwitchWorld();
             }
 
-            if (WorldManager.IsWorldFuture() && Input.GetButtonDown("MiniMap") && !PowerBarManager.IsDepleted())
+            if (WorldManager.IsWorldFuture() && Input.GetButtonDown("MiniMap") && !UIPowerBar.IsDepleted())
             {
                 MiniMapController.SwitchMiniMapState();
             }
@@ -66,13 +66,13 @@ public class GameManager : MonoBehaviour {
             if (Input.GetKeyDown("v"))
             {
                 Debug.Log("Start decrease");
-                PowerBarManager.StartDecrease(2f);
+                UIPowerBar.StartDecrease(2f);
             }
 
             if (Input.GetKeyDown("b"))
             {
                 Debug.Log("Start regen");
-                PowerBarManager.StartRegen();
+                UIPowerBar.StartRegen();
             }
         }
 
@@ -152,13 +152,13 @@ public class GameManager : MonoBehaviour {
 
         if (WorldManager.IsWorldFuture())
         {
-            PowerBarManager.RemoveListener();
-            PowerBarManager.StartRegen();
+            UIPowerBar.RemoveListener();
+            UIPowerBar.StartRegen();
         }
         else
         {
-            PowerBarManager.SetListener(new PowerBarListenerForSwitch());
-            PowerBarManager.StartDecrease(2f);
+            UIPowerBar.SetListener(new PowerBarListenerForSwitch());
+            UIPowerBar.StartDecrease(2f);
         }
     }
 }

@@ -38,8 +38,8 @@ public class MiniMapController : MonoBehaviour {
         instance.gameObject.SetActive(true);
 
         // the minimap consume power, start depleting the power bar
-        PowerBarManager.SetListener(new PowerBarListenerForMiniMap());
-        PowerBarManager.StartDecrease(1f);
+        UIPowerBar.SetListener(new PowerBarListenerForMiniMap());
+        UIPowerBar.StartDecrease(1f);
     }
 
     public static void HideMiniMap()
@@ -47,8 +47,8 @@ public class MiniMapController : MonoBehaviour {
         instance.mask.SetActive(true);
         instance.gameObject.SetActive(false);
 
-        PowerBarManager.RemoveListener();
-        PowerBarManager.StartRegen();
+        UIPowerBar.RemoveListener();
+        UIPowerBar.StartRegen();
     }
 
     public static void SwitchMiniMapState()

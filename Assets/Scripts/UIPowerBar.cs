@@ -2,11 +2,12 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class PowerBarManager : MonoBehaviour {
+public class UIPowerBar : MonoBehaviour {
 
     // only one instance of the PowerBarManager can exist inside the game
-    public static PowerBarManager instance = null;
+    public static UIPowerBar instance = null;
 
+	public bool isVisible;
     public Image powerBar;
     public Image orbActivable;
     public Image orbNonActivable;
@@ -38,17 +39,19 @@ public class PowerBarManager : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
+		if (instance == null) {
+			instance = this;
 
-            orbActivable.enabled = true;
-            orbNonActivable.enabled = false;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+			/*if(!isVisible)
+			{
+				gameObject.SetActive (false);
+			}*/
+
+			orbActivable.enabled = true;
+			orbNonActivable.enabled = false;
+		} else {
+			Destroy (gameObject);
+		}
     }
 
     // Update is called once per frame
@@ -155,6 +158,27 @@ public class PowerBarManager : MonoBehaviour {
         if (!IsDepleted())
         {
             instance.ShowOrbActivable();
+			Debug.Log ("Enabled power bar");
+
         }
     }
+
+	public static void Show()
+	{
+		instance.isVisible = true;
+		instance.gameObject.SetActive (true);
+		Debug.Log ("Power bar was shown");
+	}
+
+	public static void Hide()
+	{
+		instance.isVisible = false;
+		instance.gameObject.SetActive (false);
+		Debug.Log ("Power bar is not shown");
+	}
+
+	public static bool IsVisible()
+	{
+		return instance.isVisible;
+	}
 }

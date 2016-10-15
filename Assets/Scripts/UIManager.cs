@@ -13,12 +13,14 @@ public class UIManager : MonoBehaviour {
 
     private OrbState orbState;
 
+	private bool powerBarNotHidden = true;
+
 	// Use this for initialization
 	void Awake () {
         if(instance == null)
         {
             instance = this;
-        }
+		}
         else
         {
             Destroy(gameObject);
@@ -30,17 +32,23 @@ public class UIManager : MonoBehaviour {
 
     void FixedUpdate()
     {
+
+		if(powerBarNotHidden && !UIPowerBar.IsVisible ()){
+			HidePowerBar ();
+			powerBarNotHidden = false;
+		}
+
 		if (Player.HasOrbem ())
         {
             if (Player.CanSwitchWorld() && orbState.Equals(OrbState.NOTACTIVABLE))
             {
                 orbState = OrbState.ACTIVABLE;
-                PowerBarManager.EnablePowerBar();
+                UIPowerBar.EnablePowerBar();
             }
             else if (!Player.CanSwitchWorld() && orbState.Equals(OrbState.ACTIVABLE))
             {
                 orbState = OrbState.NOTACTIVABLE;
-                PowerBarManager.DisablePowerBar();
+                UIPowerBar.DisablePowerBar();
             }
         }
     }
@@ -69,4 +77,14 @@ public class UIManager : MonoBehaviour {
     {
         instance.pauseMenu.SetActive(false);
     }
+
+	public static void ShowPowerBar(){
+		UIPowerBar.Show ();
+		UICollectable.ChangeYPosition (-130f);
+	}
+
+	public static void HidePowerBar(){
+		UIPowerBar.Hide ();
+		UICollectable.ChangeYPosition (-40f);
+	}
 }

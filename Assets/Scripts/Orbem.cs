@@ -28,5 +28,6 @@ public class Orbem : Collectable {
 		gameObject.SetActive(false);
 		Player.SetHasOrbem (true);
 		Debug.Log (Player.HasOrbem ());
+		UIManager.ShowPowerBar ();
 	}
 }
