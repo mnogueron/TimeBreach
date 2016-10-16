@@ -15,6 +15,8 @@ public class UIPowerBar : MonoBehaviour {
     public float minSize = 330f;
     public float speed = 0.1f;
 
+	public Text powerBarHelpText;
+
     private bool isDecreasing = false;
     private bool isRegenerating = false;
     private bool isDepleted = false;
@@ -42,13 +44,9 @@ public class UIPowerBar : MonoBehaviour {
 		if (instance == null) {
 			instance = this;
 
-			/*if(!isVisible)
-			{
-				gameObject.SetActive (false);
-			}*/
-
 			orbActivable.enabled = true;
 			orbNonActivable.enabled = false;
+			powerBarHelpText.enabled = false;
 		} else {
 			Destroy (gameObject);
 		}
@@ -168,12 +166,16 @@ public class UIPowerBar : MonoBehaviour {
 		instance.isVisible = true;
 		instance.gameObject.SetActive (true);
 		Debug.Log ("Power bar was shown");
+
+		instance.powerBarHelpText.enabled = true;
+		instance.StartCoroutine (TextTimer.SetTimeout (6f));
 	}
 
 	public static void Hide()
 	{
 		instance.isVisible = false;
 		instance.gameObject.SetActive (false);
+		instance.powerBarHelpText.enabled = false;
 		Debug.Log ("Power bar is not shown");
 	}
 
