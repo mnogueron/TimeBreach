@@ -22,6 +22,7 @@ public class SceneLoader : MonoBehaviour {
 
             listOfLevels = new List<string>();
             listOfLevels.Add("TimeBreachMainMenu");
+            listOfLevels.Add("Introduction");
             listOfLevels.Add("Level1Test");
             listOfLevels.Add("Level2");
             listOfLevels.Add("TimeBreach");
