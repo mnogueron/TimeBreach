@@ -46,7 +46,13 @@ public class UIPowerBar : MonoBehaviour {
 
 			orbActivable.enabled = true;
 			orbNonActivable.enabled = false;
-			powerBarHelpText.enabled = false;
+
+            // remove this
+            if(powerBarHelpText != null)
+            {
+                powerBarHelpText.enabled = false;
+            }
+			
 		} else {
 			Destroy (gameObject);
 		}
@@ -175,7 +181,11 @@ public class UIPowerBar : MonoBehaviour {
 	{
 		instance.isVisible = false;
 		instance.gameObject.SetActive (false);
-		instance.powerBarHelpText.enabled = false;
+
+        // remove this
+        if(instance.powerBarHelpText != null) {
+            instance.powerBarHelpText.enabled = false;
+        }
 		Debug.Log ("Power bar is not shown");
 	}
 
