@@ -14,14 +14,14 @@ public class PlayerWallCollider : MonoBehaviour {
     {
         if (WorldManager.IsWorldFuture())
         {
-            if(hit.transform.gameObject.layer == LayerMask.NameToLayer("World Future"))
+            if(hit.transform.gameObject.layer != LayerMask.NameToLayer("Player"))
             {
                 parent.OnWallTriggerStay2D(hit);
             }
         }
         else
         {
-            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("World Present"))
+            if (hit.transform.gameObject.layer != LayerMask.NameToLayer("Player"))
             {
                 parent.OnWallTriggerStay2D(hit);
             }
@@ -32,14 +32,14 @@ public class PlayerWallCollider : MonoBehaviour {
     {
         if (WorldManager.IsWorldFuture())
         {
-            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("World Future"))
+            if (hit.transform.gameObject.layer != LayerMask.NameToLayer("Player"))
             {
                 parent.OnWallTriggerExit2D(hit);
             }
         }
         else
         {
-            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("World Present"))
+            if (hit.transform.gameObject.layer != LayerMask.NameToLayer("Player"))
             {
                 parent.OnWallTriggerExit2D(hit);
             }
