@@ -17,8 +17,9 @@ public class Player : MonoBehaviour {
 
     private bool facingRight = true;
     private bool grounded = false;
-    private float groundRadius = 0.2f;
+    private float groundRadius = 0.05f;
     private bool doubleJump = false;
+    private bool wallHit = false;
 
     private Animator animator;
     private new Rigidbody2D rigidbody2D;
@@ -61,17 +62,37 @@ public class Player : MonoBehaviour {
                 doubleJump = false;
             }
 
+            /** Check if the player is stuck against a wall **/
             float move = Input.GetAxisRaw("Horizontal");
 
-            animator.SetFloat("Speed", Mathf.Abs(move));
-
-            rigidbody2D.velocity = new Vector2(move * maxSpeed, rigidbody2D.velocity.y);
+            if (wallHit && !grounded)
+            {
+                animator.SetFloat("Speed", 0f);
+                rigidbody2D.velocity = new Vector2(0f, rigidbody2D.velocity.y);
+            }
+            else
+            {
+                animator.SetFloat("Speed", Mathf.Abs(move));
+                rigidbody2D.velocity = new Vector2(move * maxSpeed, rigidbody2D.velocity.y);
+            }
 
             if ((move > 0 && !facingRight) || (move < 0 && facingRight))
             {
                 Flip();
             }
         }
+    }
+
+    public void OnWallTriggerStay2D(Collider2D hit)
+    {
+        Debug.Log("Wall hit");
+        wallHit = true;
+    }
+
+    public void OnWallTriggerExit2D(Collider2D hit)
+    {
+        Debug.Log("Exit");
+        wallHit = false;
     }
 
     void Update()
