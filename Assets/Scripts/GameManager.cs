@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
 
     private class PowerBarListenerForSwitch : PowerBarListener
     {
-        public void OnStatusBarDepleted()
+        public void OnPowerBarEmpty()
         {
             if (Player.CanSwitchWorld())
             {

@@ -74,7 +74,7 @@ public class UIPowerBar : MonoBehaviour {
 						ShowOrbNonActivable ();
 
 						if (listener != null) {
-							listener.OnStatusBarDepleted ();
+							listener.OnPowerBarEmpty ();
 						}
 					}
 				} else if (isRegenerating) {

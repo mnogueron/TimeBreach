@@ -21,12 +21,12 @@ public class SceneLoader : MonoBehaviour {
             DontDestroyOnLoad(gameObject);
 
             listOfLevels = new List<string>();
-            listOfLevels.Add("TimeBreachMainMenu");
+            listOfLevels.Add("MainMenu");
             listOfLevels.Add("Introduction");
-            listOfLevels.Add("Level1Test");
+            listOfLevels.Add("Level1");
             listOfLevels.Add("Level2");
             listOfLevels.Add("Level3");
-            listOfLevels.Add("TimeBreach");
+            listOfLevels.Add("LevelDebug");
         }
         else
         {

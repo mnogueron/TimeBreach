@@ -8,7 +8,7 @@ public class MiniMapController : MonoBehaviour {
 
     private class PowerBarListenerForMiniMap : PowerBarListener
     {
-        public void OnStatusBarDepleted()
+        public void OnPowerBarEmpty()
         {
             MiniMapController.HideMiniMap();
         }
