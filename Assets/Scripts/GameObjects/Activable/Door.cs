@@ -42,8 +42,7 @@ public class Door : Activable {
 
             PlayerData dataToSave = new PlayerData();
             dataToSave.isCheckpoint = false;
-            dataToSave.playerHasOrb = Player.HasOrbem();
-            dataToSave.sceneName = SceneLoader.GetNextSceneName();
+            dataToSave.sceneData = SceneLoader.GetNextSceneName();
 
             LoadSaveManager.Save(dataToSave);
             SceneLoader.LoadNextScene();

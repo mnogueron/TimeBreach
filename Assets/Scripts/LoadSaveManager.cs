@@ -52,8 +52,7 @@ public class LoadSaveManager : MonoBehaviour {
 [Serializable]
 public class PlayerData {
 
-    public string sceneName;
-    public bool playerHasOrb;
+    public SceneData sceneData;
     public bool isCheckpoint;
     public int checkpointID;
 

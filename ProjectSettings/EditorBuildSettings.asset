@@ -5,21 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: "Assets/`u\u0300.unity"
   - enabled: 1
-    path: Assets/CreditLoader.unity
+    path: Assets/Scenes/CreditLoader.unity
   - enabled: 1
-    path: Assets/Loader.unity
+    path: Assets/Scenes/Loader.unity
   - enabled: 1
-    path: Assets/TimeBreachMainMenu.unity
+    path: Assets/Scenes/MainMenu.unity
   - enabled: 1
-    path: Assets/Introduction.unity
+    path: Assets/Scenes/Introduction.unity
   - enabled: 1
-    path: Assets/Level1Test.unity
+    path: Assets/Scenes/Levels/Level1.unity
   - enabled: 1
-    path: Assets/Level2.unity
+    path: Assets/Scenes/Levels/Level2.unity
   - enabled: 1
-    path: Assets/Level3.unity
+    path: Assets/Scenes/Levels/Level3.unity
   - enabled: 1
-    path: Assets/TimeBreach.unity
+    path: Assets/Scenes/Levels/LevelDebug.unity

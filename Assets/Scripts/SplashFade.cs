@@ -7,7 +7,7 @@ public class SplashFade : MonoBehaviour {
 
     public Image splashImage;
     public Text splashMessage;
-    public string loadLevel;
+    private string loadLevel = "MainMenu";
 
     IEnumerator Start()
     {

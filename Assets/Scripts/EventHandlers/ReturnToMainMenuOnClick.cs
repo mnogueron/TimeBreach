@@ -7,7 +7,7 @@ public class ReturnToMainMenuOnClick : MonoBehaviour {
     public void ReturnToMainMenu()
     {
         GameManager.Resume();
-        SceneManager.LoadScene("TimeBreachMainMenu");
+        SceneManager.LoadScene("MainMenu");
     }
 
 }

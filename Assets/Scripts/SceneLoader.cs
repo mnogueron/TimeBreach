@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System;
 
 public class SceneLoader : MonoBehaviour {
 
@@ -9,9 +10,11 @@ public class SceneLoader : MonoBehaviour {
     
     public string loadingScene = "Loader";
 
-    private List<string> listOfLevels;
+    private List<SceneData> listOfLevels;
 
     private float minDuration = 3f;
+
+    public string currentLoadingText;
 
     void Awake()
     {
@@ -20,13 +23,13 @@ public class SceneLoader : MonoBehaviour {
             instance = this;
             DontDestroyOnLoad(gameObject);
 
-            listOfLevels = new List<string>();
-            listOfLevels.Add("MainMenu");
-            listOfLevels.Add("Introduction");
-            listOfLevels.Add("Level1");
-            listOfLevels.Add("Level2");
-            listOfLevels.Add("Level3");
-            listOfLevels.Add("LevelDebug");
+            listOfLevels = new List<SceneData>();
+            listOfLevels.Add(new SceneData("MainMenu"));
+            listOfLevels.Add(new SceneData("Introduction"));
+            listOfLevels.Add(new SceneData("Level1"));
+            listOfLevels.Add(new SceneData("Level2", "This world is full of hazards, don't forget to jump to pass over obstacles."));
+            listOfLevels.Add(new SceneData("Level3", "You better keep an eye on your power bar. When it's empty you will be automatically teleported back..."));
+            listOfLevels.Add(new SceneData("LevelDebug"));
         }
         else
         {
@@ -36,13 +39,15 @@ public class SceneLoader : MonoBehaviour {
 
     public static void LoadNextScene()
     {
-        instance.StartCoroutine(LoadScene(GetNextSceneName()));
+        SceneData nextScene = GetNextSceneName();
+        instance.currentLoadingText = nextScene.loadingText;
+        instance.StartCoroutine(LoadScene(nextScene.name));
     }
 
-    public static string GetNextSceneName()
+    public static SceneData GetNextSceneName()
     {
-        int indexOfCurrentScene = instance.listOfLevels.IndexOf(SceneManager.GetActiveScene().name);
-        string nextScene;
+        int indexOfCurrentScene = instance.listOfLevels.IndexOf(new SceneData(SceneManager.GetActiveScene().name));
+        SceneData nextScene;
         if (indexOfCurrentScene + 1 >= instance.listOfLevels.Count)
         {
             nextScene = instance.listOfLevels[0];
@@ -54,9 +59,10 @@ public class SceneLoader : MonoBehaviour {
         return nextScene;
     }
 
-    public static void LoadSceneByName(string sceneName)
+    public static void LoadSceneByName(SceneData sceneData)
     {
-        instance.StartCoroutine(LoadScene(sceneName));
+        instance.currentLoadingText = sceneData.loadingText;
+        instance.StartCoroutine(LoadScene(sceneData.name));
     }
 
 
@@ -107,5 +113,30 @@ public class SceneLoader : MonoBehaviour {
         // Fade to new screen
         //yield return instance.StartCoroutine(FadingBackground.FadeOutAsync());
 
+    }
+}
+
+[Serializable]
+public class SceneData
+{
+    public string name;
+    public string loadingText;
+
+    public SceneData(string name, string loadingText = "")
+    {
+        this.name = name;
+        this.loadingText = loadingText;
+    }
+
+    public override bool Equals(object obj)
+    {
+        SceneData sceneData = obj as SceneData;
+        if (sceneData == null) return false;
+        return name.Equals(sceneData.name);
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
     }
 }
