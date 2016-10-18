@@ -34,7 +34,7 @@ public class MiniMapController : MonoBehaviour {
 
     public static void DisplayMiniMap()
     {
-        instance.mask.SetActive(false);
+        instance.mask.transform.localScale = new Vector3(160f, 0f, 90f);
         instance.gameObject.SetActive(true);
 
         // the minimap consume power, start depleting the power bar
@@ -44,7 +44,7 @@ public class MiniMapController : MonoBehaviour {
 
     public static void HideMiniMap()
     {
-        instance.mask.SetActive(true);
+        instance.mask.transform.localScale = new Vector3(70f, 0f, 70f);
         instance.gameObject.SetActive(false);
 
         UIPowerBar.RemoveListener();

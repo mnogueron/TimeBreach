@@ -3,10 +3,11 @@ using System.Collections;
 
 public class Key : Collectable {
 
-	protected override void PickUp()
+    protected override void PickUp()
 	{
 		GameManager.AddKey();
-		gameObject.SetActive(false);
+        AudioSource.PlayClipAtPoint(AudioManager.instance.keyPickup, transform.position);
+        gameObject.SetActive(false);
 	}
 
 }

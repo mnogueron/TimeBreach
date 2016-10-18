@@ -14,14 +14,14 @@ public class PlayerWallCollider : MonoBehaviour {
     {
         if (WorldManager.IsWorldFuture())
         {
-            if(hit.transform.gameObject.layer != LayerMask.NameToLayer("Player"))
+            if((WorldManager.FutureWorldLayer().value & 1<<hit.transform.gameObject.layer) != 0 || hit.tag == "Crate")
             {
                 parent.OnWallTriggerStay2D(hit);
             }
         }
         else
         {
-            if (hit.transform.gameObject.layer != LayerMask.NameToLayer("Player"))
+            if ((WorldManager.PresentWorldLayer().value & 1 << hit.transform.gameObject.layer) != 0 || hit.tag == "Crate")
             {
                 parent.OnWallTriggerStay2D(hit);
             }
@@ -32,14 +32,14 @@ public class PlayerWallCollider : MonoBehaviour {
     {
         if (WorldManager.IsWorldFuture())
         {
-            if (hit.transform.gameObject.layer != LayerMask.NameToLayer("Player"))
+            if ((WorldManager.FutureWorldLayer().value & 1 << hit.transform.gameObject.layer) != 0 || hit.tag == "Crate")
             {
                 parent.OnWallTriggerExit2D(hit);
             }
         }
         else
         {
-            if (hit.transform.gameObject.layer != LayerMask.NameToLayer("Player"))
+            if ((WorldManager.PresentWorldLayer().value & 1 << hit.transform.gameObject.layer) != 0 || hit.tag == "Crate")
             {
                 parent.OnWallTriggerExit2D(hit);
             }

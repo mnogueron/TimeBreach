@@ -36,8 +36,8 @@ public class Player : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        instance.animator = GetComponent<Animator>();
-        instance.rigidbody2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -53,9 +53,12 @@ public class Player : MonoBehaviour {
             {
                 grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, WorldManager.FutureWorldLayer());
             }
-            animator.SetBool("Ground", grounded);
 
+            animator.SetBool("Ground", grounded);
             animator.SetFloat("vSpeed", rigidbody2D.velocity.y);
+
+            GhostPlayer.Grounded(grounded);
+            GhostPlayer.VSpeed(rigidbody2D.velocity.y);
 
             if (grounded)
             {
@@ -68,11 +71,13 @@ public class Player : MonoBehaviour {
             if (wallHit && !grounded)
             {
                 animator.SetFloat("Speed", 0f);
+                GhostPlayer.Move(0f);
                 rigidbody2D.velocity = new Vector2(0f, rigidbody2D.velocity.y);
             }
             else
             {
                 animator.SetFloat("Speed", Mathf.Abs(move));
+                GhostPlayer.Move(Mathf.Abs(move));
                 rigidbody2D.velocity = new Vector2(move * maxSpeed, rigidbody2D.velocity.y);
             }
 
@@ -85,13 +90,13 @@ public class Player : MonoBehaviour {
 
     public void OnWallTriggerStay2D(Collider2D hit)
     {
-        Debug.Log("Wall hit");
+        //Debug.Log("Wall hit");
         wallHit = true;
     }
 
     public void OnWallTriggerExit2D(Collider2D hit)
     {
-        Debug.Log("Exit");
+        //Debug.Log("Exit");
         wallHit = false;
     }
 
@@ -102,6 +107,8 @@ public class Player : MonoBehaviour {
             if ((grounded || (!doubleJump && doubleJumpEnabled)) && Input.GetButtonDown("Jump"))
             {
                 animator.SetBool("Ground", false);
+                GhostPlayer.Grounded(false);
+
                 rigidbody2D.AddForce(new Vector2(0, jumpForce));
 
                 if (!doubleJump && !grounded)

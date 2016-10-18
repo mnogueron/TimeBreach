@@ -45,6 +45,8 @@ public class Door : Activable {
             dataToSave.sceneData = SceneLoader.GetNextSceneName();
 
             LoadSaveManager.Save(dataToSave);
+
+            AudioSource.PlayClipAtPoint(AudioManager.instance.openDoor, transform.position);
             SceneLoader.LoadNextScene();
         }
     }
