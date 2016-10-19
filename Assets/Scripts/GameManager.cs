@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour {
 		if (!isPaused && Player.HasOrbem ())
         {
 
-            if(Player.CanSwitchWorld() && UIPowerBar.IsDepleted() && !WorldManager.IsWorldFuture())
+            if(Player.CanSwitchWorld() && UIPowerBar.IsEmpty() && !WorldManager.IsWorldFuture())
             {
                 Player.SwitchWorld();
                 WorldManager.SwitchWorld();
@@ -53,12 +53,12 @@ public class GameManager : MonoBehaviour {
             }
 
 
-            if (Input.GetButtonDown("Open/Close Gate") && Player.CanSwitchWorld() && !UIPowerBar.IsDepleted())
+            if (Input.GetButtonDown("Open/Close Gate") && Player.CanSwitchWorld() && !UIPowerBar.IsEmpty())
             {
                 SwitchWorld();
             }
 
-            if (WorldManager.IsWorldFuture() && Input.GetButtonDown("MiniMap") && !UIPowerBar.IsDepleted())
+            if (WorldManager.IsWorldFuture() && Input.GetButtonDown("MiniMap") && !UIPowerBar.IsEmpty())
             {
                 MiniMapController.SwitchMiniMapState();
             }
@@ -152,11 +152,13 @@ public class GameManager : MonoBehaviour {
 
         if (WorldManager.IsWorldFuture())
         {
+            MaskController.CloseGate();
             UIPowerBar.RemoveListener();
             UIPowerBar.StartRegen();
         }
         else
         {
+            MaskController.OpenGate();
             UIPowerBar.SetListener(new PowerBarListenerForSwitch());
             UIPowerBar.StartDecrease(2f);
         }

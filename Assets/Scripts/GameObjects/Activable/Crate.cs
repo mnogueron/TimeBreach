@@ -35,7 +35,7 @@ public class Crate : Activable {
 	}
 
 	protected override void Activate(){
-		if (CanSwitchWorld() && Player.CanSwitchWorld ()) {
+		if (CanSwitchWorld() && Player.CanSwitchWorld () && !UIPowerBar.IsEmpty()) {
             Switch();
             GameManager.SwitchWorld ();
             animator.SetTrigger("zoomIn");

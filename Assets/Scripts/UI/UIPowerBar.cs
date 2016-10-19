@@ -139,7 +139,7 @@ public class UIPowerBar : MonoBehaviour {
 		}
     }
 
-    public static bool IsDepleted()
+    public static bool IsEmpty()
     {
 		if (instance != null) {
 			return instance.isDepleted;
@@ -162,7 +162,7 @@ public class UIPowerBar : MonoBehaviour {
 		if (instance != null) {
 			instance.isDisabled = false;
 			instance.powerBar.color = new Color (1f, 1f, 1f);
-			if (!IsDepleted ()) {
+			if (!IsEmpty ()) {
 				instance.ShowOrbActivable ();
 				Debug.Log ("Enabled power bar");
 			}
