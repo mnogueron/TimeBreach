@@ -1,0 +1,32 @@
+Sprites
+
+Player
+pzUH - http://opengameart.org/content/temple-run-free-sprite
+
+Background
+Kenney - http://opengameart.org/content/background-elements
+
+Environment
+Kenney - http://opengameart.org/content/platformer-art-deluxe
+Tio Aimar - http://opengameart.org/content/2d-platformer-desert-pack
+Tio Aimar - http://opengameart.org/content/2d-platformer-jungle-pack
+
+HUD
+pzUH - http://opengameart.org/content/free-fantasy-game-gui
+
+Audio
+
+Menu Theme
+eltenjohn - https://www.freesound.org/people/eltenjohn/sounds/258149/
+
+Dark Fallout - Intro Theme
+remaxin - http://opengameart.org/content/dark-fallout
+
+Key pickup
+Vinrax - http://opengameart.org/content/key-pickup
+
+Open door
+spokymodem - http://opengameart.org/content/key-jiggle
+
+Orb Pickup
+LloydEvans09 - https://www.freesound.org/people/LloydEvans09/sounds/221490/

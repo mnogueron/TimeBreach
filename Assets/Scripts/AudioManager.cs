@@ -7,6 +7,9 @@ public class AudioManager : MonoBehaviour {
 
     public AudioClip keyPickup;
     public AudioClip openDoor;
+    public AudioClip menuTheme;
+    public AudioClip introTheme;
+    public AudioClip mainTheme;
 
     void Awake()
     {

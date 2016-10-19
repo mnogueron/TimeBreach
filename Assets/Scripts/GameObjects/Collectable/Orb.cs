@@ -3,12 +3,13 @@ using System.Collections;
 
 public class Orb : Collectable {
 
+    public AudioClip orbPickup;
+
 	protected override void PickUp()
 	{
-        Debug.Log("inside pickup");
-		gameObject.SetActive(false);
+        AudioSource.PlayClipAtPoint(orbPickup, transform.position);
 		Player.SetHasOrbem (true);
-		Debug.Log (Player.HasOrbem ());
 		UIManager.ShowPowerBar ();
-	}
+        gameObject.SetActive(false);
+    }
 }

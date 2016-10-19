@@ -6,7 +6,6 @@ public class GhostPlayer : MonoBehaviour {
     public static GhostPlayer instance;
 
     private Animator animator;
-    private bool facingRight = true;
 
     void Awake()
     {

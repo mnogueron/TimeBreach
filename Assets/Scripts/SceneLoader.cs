@@ -70,6 +70,7 @@ public class SceneLoader : MonoBehaviour {
     public static IEnumerator LoadScene(string sceneName)
     {
         // Fade to black
+        instance.StartCoroutine(AudioSourceFader.instance.FadeOutSound(1.5f));
         yield return FadingBackground.FadeInAsync();
 
         // Load loading screen
@@ -77,17 +78,14 @@ public class SceneLoader : MonoBehaviour {
 
         Debug.Log("Loading screen loaded");
 
-        // !!! unload old screen (automatic)
-
         // Fade to loading screen
-        //yield return instance.StartCoroutine(FadingBackground.FadeOutAsync());
+        yield return FadingBackground.FadeOutAsync();
 
         float endTime = Time.time + instance.minDuration;
 
         // Load level async
 
         // good way to load with loading screen
-        //yield return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneName);
         async.allowSceneActivation = false;
 
@@ -100,19 +98,8 @@ public class SceneLoader : MonoBehaviour {
 
         async.allowSceneActivation = true;
 
-        // Load appropriate zone's music based on zone data
-        //MusicManager.PlayMusic(music);
-
-        // Fade to black
-        //yield return instance.StartCoroutine(FadingBackground.FadeInAsync());
-
-        // !!! unload loading screen
-        //SceneManager.UnloadScene(instance.loadingScene);
-        //LoadingSceneManager.UnloadLoadingScene();
-
-        // Fade to new screen
-        //yield return instance.StartCoroutine(FadingBackground.FadeOutAsync());
-
+        yield return FadingBackground.FadeOutAsync();
+        instance.StartCoroutine(AudioSourceFader.instance.FadeInSound(10f));
     }
 }
 

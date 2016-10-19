@@ -13,30 +13,32 @@ public class UIManager : MonoBehaviour {
 
     private OrbState orbState;
 
-	private bool powerBarNotHidden = true;
+	private bool initialization = true;
 
 	// Use this for initialization
 	void Awake () {
         if(instance == null)
         {
             instance = this;
-		}
+            orbState = OrbState.ACTIVABLE;
+        }
         else
         {
             Destroy(gameObject);
         }
-
-        InitialiseUI();
-        instance.orbState = OrbState.ACTIVABLE;
 	}
 
     void FixedUpdate()
     {
 
-		if(powerBarNotHidden && !UIPowerBar.IsVisible ()){
-			HidePowerBar ();
-			powerBarNotHidden = false;
-		}
+		if(initialization) {
+            if (!UIPowerBar.IsVisible())
+            {
+                HidePowerBar();
+            }
+            HideKey();
+            initialization = false;
+        }
 
 		if (Player.HasOrbem ())
         {
@@ -51,11 +53,6 @@ public class UIManager : MonoBehaviour {
                 UIPowerBar.DisablePowerBar();
             }
         }
-    }
-
-    private void InitialiseUI()
-    {
-        HideKey();
     }
 
     public static void DisplayKey()

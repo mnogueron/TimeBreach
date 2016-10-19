@@ -6,7 +6,7 @@ public class SceneController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        StartCoroutine(FadingBackground.FadeOutAsync());
+        //StartCoroutine(FadingBackground.FadeOutAsync());
     }
 
 	public static IEnumerator ResetScene(float fadeInDuration = -1f)

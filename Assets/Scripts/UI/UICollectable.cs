@@ -9,8 +9,6 @@ public class UICollectable : MonoBehaviour {
 
     public Image key;
 
-    private bool isVisible = true;
-
 	void Awake()
     {
         if (instance == null)
@@ -26,13 +24,11 @@ public class UICollectable : MonoBehaviour {
 
     public static void Show()
     {
-        instance.isVisible = true;
         instance.gameObject.SetActive(true);
     }
 
     public static void Hide()
     {
-        instance.isVisible = false;
         instance.gameObject.SetActive(false);
     }
 

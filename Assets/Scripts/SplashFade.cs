@@ -25,6 +25,8 @@ public class SplashFade : MonoBehaviour {
 
         yield return FadingBackground.FadeInAsync();
         SceneManager.LoadScene(loadLevel);
+        yield return FadingBackground.FadeOutAsync();
+        StartCoroutine(AudioSourceFader.instance.FadeInSound(10f));
     }
 
     void FadeIn()
