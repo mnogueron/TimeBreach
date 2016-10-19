@@ -45,15 +45,13 @@ public class GameManager : MonoBehaviour {
 		if (!isPaused && Player.HasOrbem ())
         {
 
-            if(Player.CanSwitchWorld() && UIPowerBar.IsEmpty() && !WorldManager.IsWorldFuture())
+            if(Player.CanSwitchWorld() && UIPowerBar.IsEmpty() && !WorldManager.IsWorldFuture() && MaskController.CanBeOpenedOrClosed())
             {
-                Player.SwitchWorld();
-                WorldManager.SwitchWorld();
-                UIPowerBar.StartRegen();
+                StartCoroutine(TeleportToFuture());
             }
 
 
-            if (Input.GetButtonDown("Open/Close Gate") && Player.CanSwitchWorld() && !UIPowerBar.IsEmpty())
+            if (Input.GetButtonDown("Open/Close Gate") && CanSwitchWorld())
             {
                 SwitchWorld();
             }
@@ -103,11 +101,6 @@ public class GameManager : MonoBehaviour {
         Static functions
     */
 
-    /*public static bool IsOrbEnabled()
-    {
-        return instance.orbEnable;
-    }*/
-
     public static bool IsPaused()
     {
         return instance.isPaused;
@@ -143,24 +136,58 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public static void SwitchWorld()
+    public void TeleportToPresent()
     {
         MiniMapController.HideMiniMap();
-
         Player.SwitchWorld();
+
+        // UI
+        UIPowerBar.SetListener(new PowerBarListenerForSwitch());
+        UIPowerBar.StartDecrease(2f);
+
+        // start opening the gate asynchronously
+        Debug.Log("OpenGate Async");
+        instance.StartCoroutine(MaskController.instance.OpenGateAsync());
+
+        // display the second camera
+        WorldManager.SwitchWorld();
+    }
+
+    public IEnumerator TeleportToFuture()
+    {
+        Player.SwitchWorld();
+
+        //change the transparence of the ghost
+        GhostPlayer.SetVisible();
+
+        // close the gate
+        yield return MaskController.instance.CloseGateAsync();
+
+        // go back to transparent
+        GhostPlayer.SetTranparent();
+
+        // hide the second camera
         WorldManager.SwitchWorld();
 
+        // UI
+        UIPowerBar.RemoveListener();
+        UIPowerBar.StartRegen();
+    }
+
+    public static void SwitchWorld()
+    {
         if (WorldManager.IsWorldFuture())
         {
-            MaskController.CloseGate();
-            UIPowerBar.RemoveListener();
-            UIPowerBar.StartRegen();
+            instance.TeleportToPresent();
         }
         else
         {
-            MaskController.OpenGate();
-            UIPowerBar.SetListener(new PowerBarListenerForSwitch());
-            UIPowerBar.StartDecrease(2f);
+            instance.StartCoroutine(instance.TeleportToFuture());
         }
+    }
+
+    public bool CanSwitchWorld()
+    {
+        return (Player.CanSwitchWorld() && !UIPowerBar.IsEmpty() && MaskController.CanBeOpenedOrClosed());
     }
 }

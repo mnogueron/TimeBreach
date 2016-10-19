@@ -20,4 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level3.unity
   - enabled: 1
+    path: Assets/Scenes/Levels/Level4.unity
+  - enabled: 1
     path: Assets/Scenes/Levels/LevelDebug.unity

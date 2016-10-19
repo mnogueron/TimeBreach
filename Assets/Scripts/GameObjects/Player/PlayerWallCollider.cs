@@ -12,37 +12,29 @@ public class PlayerWallCollider : MonoBehaviour {
 	
 	void OnTriggerStay2D(Collider2D hit)
     {
-        if (WorldManager.IsWorldFuture())
+        if (CollisionIsValid(hit))
         {
-            if((WorldManager.FutureWorldLayer().value & 1<<hit.transform.gameObject.layer) != 0 || hit.tag == "Crate")
-            {
-                parent.OnWallTriggerStay2D(hit);
-            }
-        }
-        else
-        {
-            if ((WorldManager.PresentWorldLayer().value & 1 << hit.transform.gameObject.layer) != 0 || hit.tag == "Crate")
-            {
-                parent.OnWallTriggerStay2D(hit);
-            }
+            parent.OnWallTriggerStay2D(hit);
         }
     }
 
     void OnTriggerExit2D(Collider2D hit)
     {
+        if (CollisionIsValid(hit))
+        {
+            parent.OnWallTriggerExit2D(hit);
+        }
+    }
+
+    bool CollisionIsValid(Collider2D hit)
+    {
         if (WorldManager.IsWorldFuture())
         {
-            if ((WorldManager.FutureWorldLayer().value & 1 << hit.transform.gameObject.layer) != 0 || hit.tag == "Crate")
-            {
-                parent.OnWallTriggerExit2D(hit);
-            }
+            return ((WorldManager.FutureWorldLayer().value & 1 << hit.transform.gameObject.layer) != 0 || hit.tag == "Crate") && hit.tag != "Collectable";
         }
         else
         {
-            if ((WorldManager.PresentWorldLayer().value & 1 << hit.transform.gameObject.layer) != 0 || hit.tag == "Crate")
-            {
-                parent.OnWallTriggerExit2D(hit);
-            }
+            return ((WorldManager.PresentWorldLayer().value & 1 << hit.transform.gameObject.layer) != 0 || hit.tag == "Crate") && hit.tag != "Collectable";
         }
     }
 }

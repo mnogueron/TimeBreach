@@ -12,7 +12,6 @@ public class SceneController : MonoBehaviour {
 	public static IEnumerator ResetScene(float fadeInDuration = -1f)
     {
 		yield return FadingBackground.FadeInAsync(fadeInDuration);
-		Debug.Log ("Fading finished");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

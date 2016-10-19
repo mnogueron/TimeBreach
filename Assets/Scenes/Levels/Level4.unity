@@ -1042,7 +1042,7 @@ Prefab:
         type: 2}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 424c2390ac52d7544b8a8f0b5ff57f60, type: 3}
+      objectReference: {fileID: 8300000, guid: b14e7930374a2d24492b4969b3420c8d, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c79097a867df654fad2d62bbaffb310, type: 2}
   m_IsPrefabParent: 0
@@ -1656,7 +1656,9 @@ MonoBehaviour:
   baseScaleX: 70
   baseScaleY: 70
   openSpeed: 2
+  closeSpeed: 4
   currentScale: {x: 0, y: 0, z: 0}
+  isInAnimation: 0
 --- !u!1001 &522664413
 Prefab:
   m_ObjectHideFlags: 0
@@ -1998,7 +2000,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000014036463836, guid: 44cc9e9f09817fb468b9b7e0ef021aa4, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -3.52
+      value: -5.61
       objectReference: {fileID: 0}
     - target: {fileID: 4000014036463836, guid: 44cc9e9f09817fb468b9b7e0ef021aa4, type: 2}
       propertyPath: m_LocalPosition.z

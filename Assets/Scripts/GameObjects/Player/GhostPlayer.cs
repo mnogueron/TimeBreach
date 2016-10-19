@@ -6,6 +6,7 @@ public class GhostPlayer : MonoBehaviour {
     public static GhostPlayer instance;
 
     private Animator animator;
+    private SpriteRenderer spriteRender;
 
     void Awake()
     {
@@ -13,6 +14,7 @@ public class GhostPlayer : MonoBehaviour {
         {
             instance = this;
             animator = GetComponent<Animator>();
+            spriteRender = GetComponent<SpriteRenderer>();
         }
         else
         {
@@ -33,5 +35,16 @@ public class GhostPlayer : MonoBehaviour {
     public static void VSpeed(float velocityY)
     {
         instance.animator.SetFloat("vSpeed", velocityY);
+    }
+
+    public static void SetVisible()
+    {
+        instance.spriteRender.color = new Color(1f, 1f, 1f, 1f);
+    }
+
+    public static void SetTranparent()
+    {
+        instance.spriteRender.color = new Color(1f, 1f, 1f, 0.55f);
+
     }
 }

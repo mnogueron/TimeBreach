@@ -812,7 +812,9 @@ MonoBehaviour:
   baseScaleX: 70
   baseScaleY: 70
   openSpeed: 2
+  closeSpeed: 4
   currentScale: {x: 0, y: 0, z: 0}
+  isInAnimation: 0
 --- !u!1 &604500025
 GameObject:
   m_ObjectHideFlags: 0
@@ -2172,7 +2174,7 @@ Prefab:
         type: 2}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 424c2390ac52d7544b8a8f0b5ff57f60, type: 3}
+      objectReference: {fileID: 8300000, guid: b14e7930374a2d24492b4969b3420c8d, type: 3}
     - target: {fileID: 4000010361126520, guid: 5c79097a867df654fad2d62bbaffb310, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
