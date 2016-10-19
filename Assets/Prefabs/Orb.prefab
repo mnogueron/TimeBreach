@@ -24,7 +24,7 @@ GameObject:
   - 114: {fileID: 114000014211013346}
   m_Layer: 10
   m_Name: Orb
-  m_TagString: Untagged
+  m_TagString: Collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

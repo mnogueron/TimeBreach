@@ -30,6 +30,7 @@ public class MaskController : MonoBehaviour {
         {
             instance = this;
             baseScale = transform.localScale;
+            currentScale = baseScale;
 
             // by default set to minimum
             transform.localScale = new Vector3(1f, 0f, 1f);
