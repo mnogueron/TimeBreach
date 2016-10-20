@@ -33,7 +33,7 @@ public class MaskController : MonoBehaviour {
             currentScale = baseScale;
 
             // by default set to minimum
-            transform.localScale = new Vector3(1f, 0f, 1f);
+            transform.localScale = new Vector3(2f, 0f, 2f);
         }
         else {
             Destroy(gameObject);
@@ -71,7 +71,8 @@ public class MaskController : MonoBehaviour {
     public IEnumerator OpenGateAsync()
     {
         isInAnimation = true;
-        transform.localScale = new Vector3(1f, 0f, 1f);
+        transform.localScale = new Vector3(2f, 0f, 2f);
+		currentScale = transform.localScale;
         while (currentScale.x < baseScale.x || currentScale.z < baseScale.z)
         {
             currentScale += new Vector3(1f * openSpeed, 0f, 1f * openSpeed);
