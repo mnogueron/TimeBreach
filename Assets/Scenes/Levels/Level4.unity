@@ -1686,30 +1686,11 @@ SpriteRenderer:
   m_Color: {r: 0.75735295, g: 0.68864155, b: 0.47334558, a: 1}
   m_FlipX: 0
   m_FlipY: 1
---- !u!1 &643741771 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000011831585714, guid: 1f0236eeb30e64420b9d60102a7097b2,
-    type: 2}
-  m_PrefabInternal: {fileID: 1930014761}
 --- !u!4 &643741772 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000013492954806, guid: 1f0236eeb30e64420b9d60102a7097b2,
     type: 2}
   m_PrefabInternal: {fileID: 1930014761}
---- !u!61 &643741773
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 643741771}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -0.18}
-  serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.35}
 --- !u!1001 &646801932
 Prefab:
   m_ObjectHideFlags: 0
@@ -4040,15 +4021,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013492954806, guid: 1f0236eeb30e64420b9d60102a7097b2, type: 2}
       propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000011831585714, guid: 1f0236eeb30e64420b9d60102a7097b2, type: 2}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 61000013295057194, guid: 1f0236eeb30e64420b9d60102a7097b2,
-        type: 2}
-      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

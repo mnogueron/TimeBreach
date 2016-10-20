@@ -38,7 +38,7 @@ public class AudioSourceFader : MonoBehaviour {
     public IEnumerator FadeInSound(float fadeInDuration)
     {
         source.volume = 0f;
-        while (source.volume < maxVolume)
+        while (source != null && source.volume < maxVolume)
         {
             source.volume += Time.deltaTime / fadeInDuration;
             yield return null;

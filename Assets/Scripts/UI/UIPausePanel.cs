@@ -19,8 +19,8 @@ public class UIPausePanel : MonoBehaviour {
 
     public void LoadLastCheckpoint()
     {
-        Resume();
         StartCoroutine(SceneController.ResetScene());
+		GameManager.Resume();
     }
 
     public void Resume()

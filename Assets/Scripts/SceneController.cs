@@ -13,5 +13,6 @@ public class SceneController : MonoBehaviour {
     {
 		yield return FadingBackground.FadeInAsync(fadeInDuration);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		yield return FadingBackground.FadeOutAsync ();
     }
 }
