@@ -43,6 +43,12 @@ public class LoadSaveManager : MonoBehaviour {
         return data;
     }
 
+	public static void DeleteSave(){
+		if(IsSaveAvailable ()){
+			File.Delete (Application.persistentDataPath + "/playerInfo.dat");
+		}
+	}
+
     public static bool IsSaveAvailable()
     {
         return File.Exists(Application.persistentDataPath + "/playerInfo.dat");
