@@ -5,6 +5,7 @@ public class Door : Activable {
 
     private GameObject buttonDisabledSign;
     private Animator animator;
+    public AudioClip openDoor;
 
     // Use this for initialization
     protected override void Start()
@@ -46,7 +47,7 @@ public class Door : Activable {
 
             LoadSaveManager.Save(dataToSave);
 
-            AudioSource.PlayClipAtPoint(AudioManager.instance.openDoor, transform.position);
+            AudioSource.PlayClipAtPoint(openDoor, transform.position);
             SceneLoader.LoadNextScene();
         }
     }

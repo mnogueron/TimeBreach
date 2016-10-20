@@ -30,7 +30,7 @@ public class SceneLoader : MonoBehaviour {
             listOfLevels.Add(new SceneData("Level2", "This world is full of hazards, don't forget to jump to pass over obstacles."));
             listOfLevels.Add(new SceneData("Level3", "You better keep an eye on your power bar. When it's empty you will be automatically teleported back..."));
             listOfLevels.Add(new SceneData("Level4", "You better keep an eye on your power bar. When it's empty you will be automatically teleported back..."));
-            listOfLevels.Add(new SceneData("LevelDebug"));
+            //listOfLevels.Add(new SceneData("LevelDebug"));
 			listOfLevels.Add(new SceneData("EndCredits"));
 
         }

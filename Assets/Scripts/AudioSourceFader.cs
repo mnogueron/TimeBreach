@@ -4,17 +4,16 @@ using System.Collections;
 public class AudioSourceFader : MonoBehaviour {
 
     public static AudioSourceFader instance;
+    public float maxVolume;
 
     private AudioSource source;
-    private float maxVolume;
-
+    
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
             source = GetComponent<AudioSource>();
-            maxVolume = source.volume;
         }
         else {
             Destroy(gameObject);
