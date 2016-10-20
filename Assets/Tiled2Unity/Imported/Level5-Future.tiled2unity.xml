@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 20/10/2016 23:48:09-->
+<!--Last exported: 21/10/2016 00:20:47-->
 <Tiled2Unity version="1.0.7.8">
   <AssignMaterial mesh="mesh_0001" material="sandCenter" />
   <AssignMaterial mesh="mesh_0002" material="grassCenter" />
@@ -18,7 +18,7 @@
   <AssignMaterial mesh="mesh_0013" material="houseBeigeAlt" />
   <AssignMaterial mesh="mesh_0014" material="houseBeige" />
   <AssignMaterial mesh="mesh_0015" material="bridgeLogsInverseRotated" />
-  <Prefab name="Level5-Future" orientation="Orthogonal" staggerAxis="Y" staggerIndex="Odd" hexSideLength="0" numLayers="2" numTilesWide="87" numTilesHigh="35" tileWidth="70" tileHeight="70" exportScale="1" mapWidthInPixels="6090" mapHeightInPixels="2450">
+  <Prefab name="Level5-Future" orientation="Orthogonal" staggerAxis="Y" staggerIndex="Odd" hexSideLength="0" numLayers="1" numTilesWide="87" numTilesHigh="35" tileWidth="70" tileHeight="70" exportScale="1" mapWidthInPixels="6090" mapHeightInPixels="2450">
     <GameObject name="Calque de Tile 1" x="0" y="0" z="0">
       <GameObject name="sandCenter" copy="mesh_0001" sortingLayerName="" sortingOrder="0" opacity="1" />
       <GameObject name="grassCenter" copy="mesh_0002" sortingLayerName="" sortingOrder="0" opacity="1" />
