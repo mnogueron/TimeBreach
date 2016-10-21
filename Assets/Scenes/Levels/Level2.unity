@@ -6017,7 +6017,7 @@ Prefab:
     - target: {fileID: 114000011496251170, guid: 44cc9e9f09817fb468b9b7e0ef021aa4,
         type: 2}
       propertyPath: doubleJumpEnabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114000011496251170, guid: 44cc9e9f09817fb468b9b7e0ef021aa4,
         type: 2}

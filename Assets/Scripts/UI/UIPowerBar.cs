@@ -164,7 +164,6 @@ public class UIPowerBar : MonoBehaviour {
 			instance.powerBar.color = new Color (1f, 1f, 1f);
 			if (!IsEmpty ()) {
 				instance.ShowOrbActivable ();
-				Debug.Log ("Enabled power bar");
 			}
 		}
     }
@@ -174,7 +173,6 @@ public class UIPowerBar : MonoBehaviour {
 		if (instance != null) {
 			instance.isVisible = true;
 			instance.gameObject.SetActive (true);
-			Debug.Log ("Power bar was shown");
 		}
 	}
 
@@ -183,8 +181,6 @@ public class UIPowerBar : MonoBehaviour {
 		if (instance != null) {
 			instance.isVisible = false;
 			instance.gameObject.SetActive (false);
-
-			Debug.Log ("Power bar is not shown");
 		}
 	}
 

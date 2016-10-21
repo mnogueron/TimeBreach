@@ -290,7 +290,8 @@ MonoBehaviour:
   jumpForce: 2400
   numberOfKey: 0
   hasOrbem: 1
-  doubleJumpEnabled: 1
+  doubleJumpEnabled: 0
+  wallHit: 0
 --- !u!114 &114000011534152970
 MonoBehaviour:
   m_ObjectHideFlags: 1
