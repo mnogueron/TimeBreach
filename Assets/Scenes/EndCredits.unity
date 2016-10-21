@@ -980,6 +980,11 @@ Prefab:
       propertyPath: maxVolume
       value: 0.698
       objectReference: {fileID: 0}
+    - target: {fileID: 82000013158876192, guid: 6ff5b370ab8fc014e9366abc0c3d1fda,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6ff5b370ab8fc014e9366abc0c3d1fda, type: 2}
   m_IsPrefabParent: 0

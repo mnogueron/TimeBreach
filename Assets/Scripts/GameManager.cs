@@ -151,6 +151,8 @@ public class GameManager : MonoBehaviour {
 
         // display the second camera
         WorldManager.SwitchWorld();
+
+        Player.instance.wallHit = false;
     }
 
     public IEnumerator TeleportToFuture()
@@ -172,6 +174,8 @@ public class GameManager : MonoBehaviour {
         // UI
         UIPowerBar.RemoveListener();
         UIPowerBar.StartRegen();
+
+        Player.instance.wallHit = false;
     }
 
     public static void SwitchWorld()

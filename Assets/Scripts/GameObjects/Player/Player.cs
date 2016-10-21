@@ -19,7 +19,7 @@ public class Player : MonoBehaviour {
     private bool grounded = false;
     private float groundRadius = 0.05f;
     private bool doubleJump = false;
-    private bool wallHit = false;
+    public bool wallHit = false;
 
     private Animator animator;
     private new Rigidbody2D rigidbody2D;

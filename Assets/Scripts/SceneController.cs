@@ -14,5 +14,6 @@ public class SceneController : MonoBehaviour {
 		yield return FadingBackground.FadeInAsync(fadeInDuration);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		yield return FadingBackground.FadeOutAsync ();
+        yield return AudioSourceFader.instance.FadeInSound(5f);
     }
 }
